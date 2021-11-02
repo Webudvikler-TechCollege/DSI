@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Test</title>
+    <script defer="true">
+        //const url = "./userobject.json";
+        const url = "./userdata.json";
+
+        /*
+        fetch(url)
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(err => {
+                console.error('Fejl: ' + err);
+            })
+        */
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                for(let user of data.users) {
+                    console.log(user);
+                }
+            })
+            .catch(err => {
+                console.error('Fejl: ' + err);
+            })
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
