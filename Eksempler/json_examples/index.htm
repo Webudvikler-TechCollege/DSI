@@ -8,20 +8,11 @@
         //const url = "./userobject.json";
         const url = "./userdata.json";
 
-        /*
-        fetch(url)
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(err => {
-                console.error('Fejl: ' + err);
-            })
-        */
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                for(let user of data.users) {
-                    console.log(user);
-                }
+                let response = JSON.parse(data);
+                console.log(response);
             })
             .catch(err => {
                 console.error('Fejl: ' + err);

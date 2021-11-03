@@ -8,6 +8,10 @@ I synkron programmering vil man følge opskriften slavisk punkt for punkt og vi 
 
 I asynkron programmering vil alle punkter blive sat i gang med det samme og vi ved ikke helt hvad der er færdig først og hvor lang tid processen tager.
 
+Nedenstående billede illustrerer også forskellen.
+
+![Se det her](./images/async_vs_sync.png)
+___
 ## Synkron programmering
 Som et ganske logisk udgangspunkt læser javascript et stykke kode oppe fra og ned - fuldstændigt som vi har skrevet det i koden.
 
@@ -54,6 +58,12 @@ Selv om koden med setTimeOut er placeret før de andre outputs, vil den stadig s
 > Værdi 2
 > Asynkront kald: Værdi 1
 ```
+## Videoer
+
+
+- [Asynchronous Vs Synchronous Programming by WebDev](https://www.youtube.com/watch?v=Kpn2ajSa92c)
+
+- 
 
 
 
