@@ -68,3 +68,6 @@ Og omvendt kan objekter optræde som værdier i et array:
     ]
 }
 ```
+___
+## Test af JSON
+- [Test dit json dokument](https://jsonformatter.curiousconcept.com/)

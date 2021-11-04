@@ -71,6 +71,9 @@ fetch(url)
     // Vis fejl hvis der er en
     .catch(err => console.error(err))
 ```
+___
+## Læs mere om fetch
+- [Nem Fetch Turorial &raquo;](https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data)
 
 
 
