@@ -99,7 +99,7 @@ I dette funktions-scope skal du nu oprette en variablen *authors*, og pege den p
 Da vi skal oprette et &lt;li&gt; element for hver forfatter med billede og navn, skal vi loope arrayet af brugere. Her kan vi med fordel benytte os af javascripts `Map()` metode:
 ```js
 .then(data => {
-    lad authors = data.results;
+    let authors = data.results;
 
     return authors.map(author => {
 
