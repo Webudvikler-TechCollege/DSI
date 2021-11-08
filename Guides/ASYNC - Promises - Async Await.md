@@ -1,9 +1,11 @@
-# Javascript Promises - Async Await
+# Javascript Promises - Asynkrone funktioner
 
-Der er en særlig syntaks til at arbejde med promises på en mere behagelig måde, kaldet "async/await". Det er overraskende nemt at forstå og bruge.
+Ved at bruge metoderne `async` og `await`, kan vi benytte os af asynkrone funktioner og dermed  undgå den lidt komplekse chaining ballade med `.then()` og `.catch()`.
 
-## Asynkrone funktioner
-Lad os starte med det keywordet `async`. Den placeres før en funktion, som i denne defination:
+Disse metoder er måske lidt nemmere at forstå og dermed også at bruge.
+___
+## Async
+Keywordet `async` placeres foran en funktion som i eksemplet herunder:
 ```js
 async function f() {
    retur 1;
@@ -19,7 +21,7 @@ async function f() {
 
 f().then(alert); // 1
 ```
-Vi kunne udtrykkeligt returnere et promise, som ville være det samme:
+Vi kunne også returnere et promise, som ville give samme resultat:
 ```js
 async function f() {
    return Promise.resolve(1);
@@ -39,7 +41,7 @@ Følgende er et eksempel med et promise, der løser sig på 1 sekund:
 ```js
 async function f() {
 
-  let promise = new Promise((afgør, afvis) => {
+  let promise = new Promise((resolve, reject) => {
     setTimeout(() => resolve("Done!"), 1000)
   });
 
@@ -50,50 +52,20 @@ async function f() {
 
 // Kalder funktion
 f();
-
 ```
-I eksemplet "pauser" funktionskaldet ved linjen med `await` keywordet og genoptages først, når vores promise er afviklet og returneret et resultat. 
+I eksemplet "pauser" funktionskaldet ved linjen med `await` keywordet og genoptages først, når vores promise er afviklet og har returneret et resultat. 
 
-Dermed suspenderer `await` funktionsudførelsen, indtil et promise er afviklet, og genoptager det derefter med resultatet af det promise. Det koster ingen CPU-ressourcer, fordi JavaScript-motoren kan udføre andre opgaver i mellemtiden som at udføre andre scripts, håndtere begivenheder osv.
+Dermed suspenderer `await` funktionens handling, indtil et promise er afviklet, og genoptager det derefter med resultatet af det promise. Det koster ingen CPU-ressourcer, fordi JavaScript-motoren kan udføre andre opgaver i mellemtiden som at udføre andre scripts, håndtere begivenheder osv.
 
-Denne måde er bare en mere elegant syntaks end .then og catch metoden. Og så er det nemmere at læse og skrive.
+Denne måde er bare en mere elegant syntaks end `.then` og `.catch` metoden. Og så er det nemmere at læse og skrive.
 
-Kan ikke bruge vente i almindelige funktioner
-Hvis vi forsøger at bruge await i en ikke-asynkron funktion, vil der være en syntaksfejl:
+### Await kan ikke anvendes i almindelige funktioner
 
-funktion f() {
-  lad løfte = Promise.resolve(1);
-  lad resultat = afvent løfte; // Syntaks fejl
+Hvis vi forsøger at bruge await i en ikke-asynkron funktion, vil vi få en syntaksfejl:
+```js
+function f() {
+  let promise = Promise.resolve(1);
+  let result = await promise; // Syntax error
 }
-Vi får muligvis denne fejl, hvis vi glemmer at sætte async før en funktion. Som tidligere nævnt fungerer afvent kun i en asynkronfunktion.
-
-Lad os tage showAvatar()-eksemplet fra kapitlet Promises chaining og omskrive det ved hjælp af async/await:
-
-Vi bliver nødt til at erstatte .dan opkald med afventer.
-Vi bør også gøre funktionen asynkroniseret, så de kan fungere.
-asynkron funktion showAvatar() {
-
-  // læs vores JSON
-  lad svar = await fetch('/article/promise-chaining/user.json');
-  lad bruger = afvent svar.json();
-
-  // læs github-bruger
-  lad githubResponse = await fetch(`https://api.github.com/users/${user.name}`);
-  lad githubUser = await githubResponse.json();
-
-  // vis avataren
-  lad img = document.createElement('img');
-  img.src = githubBruger.avatar_url;
-  img.className = "løfte-avatar-eksempel";
-  document.body.append(img);
-
-  // vent 3 sekunder
-  await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-
-  img.remove();
-
-  returner githubUser;
-}
-
-showAvatar();
-Temmelig ren og let at læse, ikke? Meget bedre end før.
+```
+Vi får denne fejl, hvis vi glemmer at sætte `async` før en funktion. 
