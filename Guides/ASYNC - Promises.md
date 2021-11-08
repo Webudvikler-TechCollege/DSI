@@ -25,7 +25,7 @@ ___
 - [Javascript Info: Promise Basics &raquo;](https://javascript.info/promise-basics)
 ___
 ## Se video om promises
-- [WebDev: JavaScript Promises In 10 Minutes &raquo;](https://www.youtube.com/watch?v=DHvZLI7Db8E) 
+- [WebDev: JavaScript Promises In 10 Minutes &raquo;](https://www.youtube.com/watch?v=DHvZLI7Db8E)
 
 
 
