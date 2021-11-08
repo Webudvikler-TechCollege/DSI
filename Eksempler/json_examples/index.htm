@@ -5,18 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSON Test</title>
     <script defer="true">
-        //const url = "./userobject.json";
-        const url = "./userdata.json";
+        const url = "./userobject.json"; // Endpoint
+        let result = null;
 
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                let response = JSON.parse(data);
-                console.log(response);
+                createHtml(data);
             })
-            .catch(err => {
-                console.error('Fejl: ' + err);
-            })
+            .catch(err => console.error(`Fejl: ${err}`));
+
+        function createHtml(data) {
+            let p = document.createElement('p');
+            p.innerText = `${data.firstname} ${data.lastname}`;
+            document.body.append(p);
+        }
+
+
 
     </script>
 </head>
