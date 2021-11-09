@@ -1,0 +1,32 @@
+{
+    "users" : [
+        {
+            "firstname" : "Ole",
+            "lastname" : "Olsen",
+            "work_info" : {
+                "position" : "Biokemiker",
+                "company" : "Novo Nordisk"
+            },
+            "interests" : ["Trekking", "Drinking", "Gaming"]
+        },
+        {
+            "firstname" : "Per",
+            "lastname" : "Pedersen",
+            "work_info" : {
+                "position" : "Tømrer",
+                "company" : "Træ & Tag"
+            },
+            "interests" : ["Fiskeri", "Gjøl trolde"]
+        },
+        {
+            "firstname" : "Lise",
+            "lastname" : "Larsen", 
+            "work_info" : {
+                "position" : "Arbejdsløs",
+                "company" : null
+            },
+            "interests" : ["Netflix", "HBO", "CMore"]
+
+        }
+    ]
+}

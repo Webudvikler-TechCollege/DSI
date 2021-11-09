@@ -1,0 +1,75 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Eksempler - Arrays</title>
+    <script defer="true">
+
+        // Deklarerer konstant med endpoint url 
+        const url_to_users = './userdata.json';
+
+        // Kalder url med fetch
+        fetch(url_to_users)
+            // Parse svar som json hvis fetch bliver resolved...
+            .then(response => response.json())
+            // Parse json til data (arrow function)
+            .then(data => {
+                // Tjek om data og data user findes og kan mappes som et array
+                // Map smider objekt værdi af hvert index ind i variablen item
+                (data && data.users && data.users.map((item, key) => {
+                    // Kalder funktion createHtml på item objektet
+                    createHtml(item);
+                }))
+            })
+            // Fanger eventuelle fejl (rejects)
+            .catch(err => console.error(err))
+
+        // Definerer funktion til html output
+        // Tager user objekt som parameter
+        const createHtml = (user) => {
+            // Opretter ul element
+            const ul = document.createElement('ul');
+
+            // OPretter li element til fulde navn
+            const li_name = document.createElement('li');
+            li_name.innerText = `${user.firstname} ${user.lastname}`;
+            ul.append(li_name);
+
+            // Opretter li element til job info
+            const li_work = document.createElement('li');
+            li_work.innerText = `${user.work_info.position}, ${user.work_info.company}`;
+            ul.append(li_work);
+
+            // Hvis der er interesser 
+            if (user.interests.length) {
+                // Opretter li element til interesse overskrift
+                const li_int = document.createElement('li');
+                li_int.innerText = 'Interesser:'
+                // Opretter ul element til interesser
+                const ul_int = document.createElement('ul');
+                // Looper interesse array
+                for(let interest of user.interests) {
+                    // OPretter li element til interesse
+                    const li = document.createElement('li');
+                    li.innerText = interest;
+                    ul_int.append(li);                    
+                }
+                // Tilføjer ul til interesse li 
+                li_int.append(ul_int);
+                // Tilføjer li til ul
+                ul.append(li_int);
+            }
+            // Tilføjer ul til body
+            document.body.append(ul);
+
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
