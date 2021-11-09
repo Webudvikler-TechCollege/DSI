@@ -34,12 +34,12 @@
 
             // OPretter li element til fulde navn
             const li_name = document.createElement('li');
-            li_name.innerText = `${user.firstname} ${user.lastname}`;
+            li_name.innerText = `Navn: ${user.firstname} ${user.lastname}`;
             ul.append(li_name);
 
             // Opretter li element til job info
             const li_work = document.createElement('li');
-            li_work.innerText = `${user.work_info.position}, ${user.work_info.company}`;
+            li_work.innerText = `Stilling & Sted: ${user.work_info.position}, ${user.work_info.company}`;
             ul.append(li_work);
 
             // Hvis der er interesser 
