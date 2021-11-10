@@ -6,9 +6,13 @@
     <title>Fetch Dog</title>
     <script defer="true">
         
-        const url = 'https://dog.ceo/api/breeds/image/random';
+        const url = 'https://icanhazdadjoke.com/';
 
-        fetch(url)
+        const fetchHeaders = new Headers();
+        fetchHeaders.append("Accept", "application/json");
+
+
+        fetch(url, {headers: fetchHeaders})
             .then(response => response.json())
             .then(data => {
                     console.log(data);
