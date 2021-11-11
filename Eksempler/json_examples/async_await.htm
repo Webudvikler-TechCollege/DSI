@@ -8,24 +8,34 @@
 
         // Asynkron funktion til at kalde fetch med
         const fetchdata = async (endpoint) => {
-            const response = await fetch(endpoint); // Venter på respons fra fetch kald
-            const result = await response.json(); // Venter på json parse af respons
-            return result; // Returnerer resultat
+            try {
+                const response = await fetch(endpoint); // Venter på respons fra fetch kald
+                const result = await response.json(); // Venter på json parse af respons
+                return result; // Returnerer resultat
+            }
+            catch(err) { 
+                console.error(`Fetch Fejl: ${err}`)
+            }
         } 
+
+        (async () => {
+            const test = await fetchdata('./userdata.json');
+            console.log(test);
+        })();
 
         // Asynkron funktion til at kalde user api
         const getusers = async () => {
             const url = "./userdata.json"; // Deklarerer URL Endpoint
             const data = await fetchdata(url); // Kalder fetchdata funktion med await
-            (data && data.users.map((item, key) => { // Mapper data.users hvis de findes
+            data && data.users.map((item, key) => { // Mapper data.users hvis de findes
                 let div = document.createElement('div'); 
                 div.innerText = `${item.firstname} ${item.lastname}`;
                 document.body.append(div);
-            }))
+            })
         }
 
         // Kalder getusers funktion
-        getusers();
+        //getusers();
     </script>
 </head>
 <body>
