@@ -4,72 +4,71 @@ const myFetcher = async (url, options = null) => {
     return result;
 }
 
-const getImages = async () => {
-    const url = 'https://dog.ceo/api/breeds/image/random/10';
-    const images = await myFetcher(url);
+let curImg = 0;
+const images = [];
+const imageSlides = [];
+const slideWrapper = document.querySelector('.slide-wrapper');
+const btnNext = document.querySelector('.slider_control_next');
+const btnPrev = document.querySelector('.slider_control_prev');
+const slider = document.querySelector(".slider");
+slider.classList.add("slider");
 
-    images && images.message.map((image, key) => {
-        const img = document.createElement('img');
-        img.setAttribute('src', image);
-        if(key === 0) {
-            img.setAttribute('id', 'last-clone');
-        } else if((key+1) === images.message.length) {
-            img.setAttribute('id', 'first-clone');
-        }
-        document.querySelector('.slider-wrapper').append(img);
+
+const getImages = async () => {
+    const url = 'https://picsum.photos/v2/list';
+    const data = await myFetcher(url);
+
+    data && data.map((item, key) => {
+        //console.log(item);
+        addImage(item.download_url);
+        images.push(item.download_url);
     })
-    await setSlider();
+    //setting wrapper width to total width of all images combined
+    slideWrapper.style.width = imageSlides.length * slider.offsetWidth + "px";
+
 }
 
-const setSlider = async () => {
+btnNext.addEventListener('click', () => {
+    slideImage(true)
+});
 
-    //Image wrappers
-    const sliderWrapper = document.querySelector('.slider-wrapper');
-    const sliderImages = sliderWrapper.querySelectorAll('img');
+btnPrev.addEventListener('click', () => {
+    slideImage(false)
+});
 
+const addImage = (img) => {
+    const imgWrap = document.createElement("li");
+    const imgElm = document.createElement('img');
+    imgElm.src = img;
+    imgWrap.append(imgElm)
+    document.querySelector('.slide-wrapper').append(imgWrap);
+}
 
-    //Prev & Next Buttons
-    const prevBtn = document.querySelector('#prevBtn');
-    const nextBtn = document.querySelector('#nextBtn');
-
-    //Set counter
-    let counter = 1;
-
-    //Set image size
-    const size = sliderImages[0].clientWidth;
-    console.dir(sliderImages[0].naturalWidth);
-
-    sliderWrapper.style.transform = 'translateX(' + (-size * counter) + 'px)';
-
-    //Sæt click event på next button
-    nextBtn.onclick = () => {
-        if (counter >= sliderImages.length - 1) return;
-        sliderWrapper.style.transition = 'transform 0.4s ease-in-out';
-        counter++;
-        sliderWrapper.style.transform = 'translateX(' + (-size * counter) + 'px)';
-    }
-
-    //Sæt click event på next button
-    prevBtn.onclick = () => {
-        if (counter <= 0) return;
-        sliderWrapper.style.transition = 'transform 0.4s ease-in-out';
-        counter--;
-        sliderWrapper.style.transform = 'translateX(' + (-size * counter) + 'px)';
-    }
-
-    sliderWrapper.addEventListener('transitionend', () => {
-        if (sliderImages[counter].id === 'last-clone') {
-            sliderWrapper.style.transistion = 'none';
-            counter = sliderImages.length - 2;
-            sliderWrapper.style.transform = 'translateX(' + (-size * counter) + 'px)';
+const slideImage = (next) => {
+    if(next) {
+		if (curImg != images.length - 1) {
+			curImg++;
+        } else {
+            slideWrapper.classList.add("noTransition");
+            curImg = 0;
+            setTimeout(() => {
+				slideWrapper.classList.remove("noTransition");
+			}, 1);
         }
-
-        if (sliderImages[counter].id === 'first-clone') {
-            sliderWrapper.style.transistion = 'none';
-            counter = sliderImages.length - counter;
-            sliderWrapper.style.transform = 'translateX(' + (-size * counter) + 'px)';
+    } else {
+        if(curImg != 0) {
+            curImg--;
+        } else {
+			slideWrapper.classList.add("noTransition");
+			curImg = images.length - 1;
+			setTimeout(() => {
+				slideWrapper.classList.remove("noTransition");
+			}, 200);
         }
-    });
+    }
+    console.dir(slider);
+	slideWrapper.style =
+		"transform: translateX(-" + curImg * slider.offsetWidth + "px)";
 }
 
 getImages();
