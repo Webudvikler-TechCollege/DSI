@@ -6,9 +6,6 @@
 /* Importerer myFetch funktion fra helper fil */
 import { myFetch } from './helper.js';
 
-/* Funktionskald til at hente liste med mål */
-getGoalList();
-
 /**
  * Funktionsvariabel til at hente liste af mål
  */
@@ -34,6 +31,9 @@ const getGoalList = async () => {
         document.querySelector('.goalcontainer').append(wrapper);
     }) 
 }
+
+/* Funktionskald til at hente liste med mål */
+getGoalList();
 
 /**
  * Funktionsvariabel til at hente mål detaljer
