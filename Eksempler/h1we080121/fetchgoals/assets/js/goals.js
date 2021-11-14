@@ -17,6 +17,7 @@ const getGoalList = async () => {
     data.items.map(function(item, key) {
         // Definerer div wrapper
         const wrapper = document.createElement('div');
+        
         // Definerer anchor tag med tekst og click event
         const link = document.createElement('a');
         link.innerText = item.title;
