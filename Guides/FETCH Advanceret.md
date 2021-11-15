@@ -1,10 +1,8 @@
-# Javascript Fetch - en mere advanceret tilgang
-
-Vi har kigget på en simpel anvendelse af fetch. Denne guide giver et mere advanceret indblik i javascripts fetch API.
+# Javascript Fetch med option objekt
 
 Fetch metoden tager to argumenter, hvor det første argument er den url som skal kaldes og dermed obligatorisk. 
 
-Metodens andet argument skal være et request objekt med forskellige egenskaber for din forespørgsel og dette argument er valgfrit. Det betyder at hvis det ikke er angivet, vil kaldet som standard være et HTTP GET request - altså et kald der forsøger at hente data fra den pågældende url.
+Metodens andet argument er valgfrit men kan tage et request objekt med forskellige egenskaber for din forespørgsel. Det betyder at hvis det ikke er angivet, vil kaldet som standard være et HTTP GET request - altså et kald der forsøger at hente data fra den pågældende url.
 
 Følgende er et eksempel der viser et POST kald med fetch metoden:
 ```js
@@ -33,6 +31,8 @@ Objektet er smart, da vi kan påvirke vores kald med mange forskellige elementer
 
 De mest almindelige er:
 - *method*: Request metoden f.eks. GET, POST osv. 
+
+- *headers*: 
 
 - *body*: Kroppen til dit request. Her kan du tilføje FormData, URLSearchParams mm. Bemærk, at requests af GET- eller HEAD-metoden, ikke kan have en krop.
 

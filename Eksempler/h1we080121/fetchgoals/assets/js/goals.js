@@ -44,6 +44,11 @@ const getGoalDetails = async goal_id => {
     // Kalder data
     const data = await myFetch(`https://api.mediehuset.net/sdg/goals/${goal_id}`);
 
+    // Kalder modal element til objekt modal
+    const modal = document.querySelector('.goalmodal');
+    // Nulstiller indhold i modal
+    modal.innerHTML = '';
+
     // Definerer titel element
     const title = document.createElement('h1');
     title.innerText = data.item.title;
@@ -56,7 +61,17 @@ const getGoalDetails = async goal_id => {
     const svg = icon.querySelector('svg');
     svg.style.fill = `#${data.item.color}`;
 
-    // Appender elementer til .goalcontainer element
-    document.querySelector('.goalcontainer').append(title);
-    document.querySelector('.goalcontainer').append(icon);
+    // Definerer button element med innerText og click event
+    const button = document.createElement('button');
+    button.innerText = 'Close';
+    button.addEventListener('click', () => {
+        modal.style.display = 'none';
+    })
+
+    // Appender elementer til modal objekt
+    modal.append(title, icon, button);
+    // Sætter modal's display til block
+    modal.style.display = 'block';
+
+
 }
