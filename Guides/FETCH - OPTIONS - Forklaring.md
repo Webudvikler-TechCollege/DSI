@@ -85,7 +85,7 @@ const getProctectedData = async () => {
     const options = {
         method: 'GET',
         headers: {
-            'Authorization' : `Baerer ${token}`
+            'Authorization' : `Baerer ${token.access_token}`
         }
     }
 
