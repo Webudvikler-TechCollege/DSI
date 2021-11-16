@@ -17,15 +17,15 @@ Nu, hvis du ikke ved, hvad det er, så fortvivl ikke. Bare se efter et bestemt f
 
 Overskrifter er et nøgle-værdi-par i tekststrengformat adskilt af et kolon. For at se, hvordan de ser ud i praksis, tjek eksemplet nedenfor:
 
+```js
 {
-
  "key1": "værdi1",
 
  "key2": "værdi2",
 
  "key3": "værdi3",
-
 }
+```
 
 Reelle overskrifter siger dog normalt ikke nøgle og værdi. Jeg brugte bare disse udtryk for klarhedens skyld. Normalt er de brugte strenge længere og mere tilfældige, som det der sker, når din kat sidder på dit tastatur, fordi det er varmt.
 

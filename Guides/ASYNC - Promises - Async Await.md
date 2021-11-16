@@ -11,7 +11,7 @@ async function f() {
    retur 1;
 }
 ```
-Når vi sætter `async` foran en funktion betyder det ganske enkelt at funktionen skal returnere et promise.
+Når vi sætter `async` foran en funktion betyder det at funktionen skal returnere et promise.
 
 For eksempel returnerer denne funktion et opfyldt promise med resultatet 1:
 ```js
