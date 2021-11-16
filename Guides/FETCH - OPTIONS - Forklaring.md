@@ -12,11 +12,10 @@ const url = 'https://api.mediehuset.net/comments';
 
 // Option objekt med metode og form body
 const options = {
-    method: 'PUT',
-    body: formData   
+    method: 'PUT'
 }
 
-// Fetch kald med then/catch
+// Fetch kald med then/catch og option objekt
 fetch(url, options)
     .then(response => response.json())
     .then(data => console.log(data))
@@ -38,3 +37,57 @@ De mest almindelige er:
 
 Du kan se en liste over de alle forskellige options [her](https://developer.mozilla.org/en-US/docs/Web/API/fetch#syntax)
 ___
+## Fetch kald med POST metode
+Nedenstående eksempel tager udgangspunkt i eksemplet med fetch funktionen fra  
+[denne guide](https://github.com/Webudvikler-TechCollege/DSI/blob/main/Guides/ASYNC%20-%20Fetch%20Function.md).
+
+Hvis vi kalde en fetch med en POST skal vi indsætte *method* og *body* i vores option objekt. Vi kan med fordel bruge javascripts formData til at tilføje vores formdata med:
+```js
+const getData = async () => {
+    const formData = new FormData();
+    formData.append('username', 'hans');
+    formData.append('password', 'hans');
+
+    const options = {
+        method: 'POST',
+        body: formData
+    }
+
+    const data = await myFetchFunction('https://api.mediehuset.net/token', options);
+}
+```
+I ovenstående eksempel hentes der en token fra skolens api med brugernavn og password. Du skal selvfølgelig indsætte dine egne credentials for at det virker.
+
+Disse data kan vi smide i vores *sessionStorage*, som er en slags datalager i browseren. Disse data forsvinder når browser vinduet lukkes - eller din token udløber.
+
+I eksemplet herunder kan du se hvordan du gemmer data i sessionStorage med metoden `setItem()`:
+```js
+...
+const data = await myFetchFunction('https://api.mediehuset.net/token', options);
+
+sessionStorage.setItem('token', JSON.Stringify(data));
+```
+Da vi ikke kan gemme et json objekt er vi nødt til at konvertere det til en string med `JSON.Stringify()`.
+
+Nu kan vi altid hente vores token i sessionStorage med metoden `getItem()`:
+```js
+const token = sessionStorage.getItem('token');
+```
+___
+## Fetch kald med authorization headers
+Hvis vi skal kalde et endpoint som kræver en token skal vi benytte *authorization headers*:
+
+```js
+const getProctectedData = async () => {
+    const token = sessionStorage.getItem('token');
+    
+    const options = {
+        method: 'GET',
+        headers: {
+            'Authorization' : `Baerer ${token}`
+        }
+    }
+
+    const data = await myFetchFunction('https://api.mediehuset.net/protecteddata', options);
+}
+

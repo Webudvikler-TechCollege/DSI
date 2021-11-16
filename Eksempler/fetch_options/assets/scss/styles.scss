@@ -1,0 +1,67 @@
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 2fr 4fr 2fr;
+    grid-gap: 10px;
+}
+
+.list-wrapper {
+    border: solid 1px #000;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 5px;
+
+    > div {
+        box-sizing: border-box;
+        height: 100px;
+        cursor: pointer;
+        padding: 20% 0;
+        figure {
+            margin: auto;
+            width: 100%;
+            max-width: 50px;
+        }
+    }
+}
+
+.detail-wrapper {
+    padding: 0 5%;
+    border: solid 1px #000;
+
+    img {
+        width: 100%;
+    }
+}
+
+.user-wrapper {
+    padding: 5%;
+    border: solid 1px #000;
+
+    .comment-wrapper {
+        div {
+            margin-bottom: 5%;
+            padding-bottom: 5%;
+            border-bottom: solid 1px #999;
+
+            span {
+                display: block;
+            }
+            .date, .author {
+                font-size: 0.8rem;
+            }
+            .title {
+                font-weight: 600;
+            }
+            .author {
+                color: red;
+            }
+        }
+    }
+}
+
+.active {
+    display: block;
+}
