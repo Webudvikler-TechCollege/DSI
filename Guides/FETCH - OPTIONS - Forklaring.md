@@ -57,7 +57,8 @@ const getData = async () => {
 }
 ```
 I ovenstående eksempel hentes der en token fra skolens api med brugernavn og password. Du skal selvfølgelig indsætte dine egne credentials for at det virker.
-
+___
+## Lagring af token i sessionStorage
 Disse data kan vi smide i vores *sessionStorage*, som er en slags datalager i browseren. Disse data forsvinder når browser vinduet lukkes - eller din token udløber.
 
 I eksemplet herunder kan du se hvordan du gemmer data i sessionStorage med metoden `setItem()`:
@@ -80,7 +81,7 @@ Hvis vi skal kalde et endpoint som kræver en token skal vi benytte *authorizati
 ```js
 const getProctectedData = async () => {
     const token = sessionStorage.getItem('token');
-    
+
     const options = {
         method: 'GET',
         headers: {
