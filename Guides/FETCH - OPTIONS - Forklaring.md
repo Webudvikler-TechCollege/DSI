@@ -41,7 +41,7 @@ ___
 Nedenstående eksempel tager udgangspunkt i eksemplet med fetch funktionen fra  
 [denne guide](https://github.com/Webudvikler-TechCollege/DSI/blob/main/Guides/ASYNC%20-%20Fetch%20Function.md).
 
-Hvis vi kalde en fetch med en POST skal vi indsætte *method* og *body* i vores option objekt. Vi kan med fordel bruge javascripts formData til at tilføje vores formdata med:
+Hvis vi kalde en fetch med en POST skal vi indsætte *method* og *body* i vores option objekt. Vi kan med fordel bruge javascripts [formData interface](https://javascript.info/formdata) til at tilføje vores formdata med.
 ```js
 const getData = async () => {
     const formData = new FormData();
