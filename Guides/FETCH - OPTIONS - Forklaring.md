@@ -70,9 +70,13 @@ sessionStorage.setItem('token', JSON.Stringify(data));
 ```
 Da vi ikke kan gemme et json objekt er vi nødt til at konvertere det til en string med `JSON.Stringify()`.
 
-Nu kan vi altid hente vores token i sessionStorage med metoden `getItem()`:
+Nu kan vi altid hente vores token i sessionStorage med metoden `getItem()`. Da det ligger som en JSON string skal vi konvertere den til et objekt og det gør vi med `JSON.Parse()`:
 ```js
-const token = sessionStorage.getItem('token');
+const token = JSON.Parse(sessionStorage.getItem('token'));
+
+if(token.access_token) {
+    console.log(`Du er logget ind som ${token.username}`);
+}
 ```
 ___
 ## Fetch kald med authorization headers

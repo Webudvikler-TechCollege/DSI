@@ -11,14 +11,17 @@ Det betyder at du kan returnere svar direkte til funktionskaldet og så slippe d
 // Definerer funktionen som asynkron med keywordet async
 // og to parametre - url og options
 async function myFetchFunction(url, options = null) {
-    // Hvis options er null skal var sættes til objekt med metoden get
+    // Deklarerer respons variabel
+    let response;
+
+    // Hvis options er false...
     if(!options) {
-        options = {
-            method: 'GET'   
-        }
+        // Kalder fetch med url - venter på svar
+        response = await fetch(url);
+    } else {
+        // Kalder fetch med url og options - venter på svar
+        response = await fetch(url, options);
     }
-    // Kalder fetch med await: vores kode venter på respons inden den går videre 
-    let response = await fetch(url, options);
     // Kalder json parser: vores kode venter på respons inden den går videre 
     let data = await response.json();
     // returnerer data

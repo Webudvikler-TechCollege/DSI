@@ -1,10 +1,12 @@
 
 export const myFetch = async (url, options = null) => {
+    let response;
+
     try {
         if(!options) {
-            const response = await fetch(url);
+            response = await fetch(url);
         } else {
-            const response = await fetch(url, options);
+            response = await fetch(url, options);
         }
         const result = await response.json();
         return result;            
