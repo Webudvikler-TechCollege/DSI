@@ -8,14 +8,6 @@ const Auth = async () => {
     formData.append('username', username);
     formData.append('password', password);
 
-    // Log med spread operator
-    console.log([...formData]);
-
-    // Log key value pairs med for/of loop og destructuring assignment 
-    for(let [key, value] of formData) {
-        console.log(key, value);
-    }
-
     const options = {
         method: 'POST',
         body: formData

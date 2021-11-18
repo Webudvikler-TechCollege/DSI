@@ -58,7 +58,9 @@ export async function commentList(goal_id) {
             const del = document.createElement('a');
             del.innerText = 'X';
             del.addEventListener('click', () => {
-                deleteComment(item.id);
+                if(confirm('Vil du virkelig slette den kommentar?')) {
+                    deleteComment(item.id);                
+                }
             })
             const edit = document.createElement('a');
             edit.innerText = 'V';
