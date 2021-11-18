@@ -56,6 +56,15 @@ export function createFormElement(element, options) {
             html.id = options.name;
             html.type = options.type;
             break;
+        case 'TEXTAREA':
+            label = document.createElement('label');
+            label.for = options.name;
+            label.innerText = `${options.display}: `;
+
+            html = document.createElement('textarea');
+            html.name = options.name;
+            html.id = options.name;
+            break;
         case 'BUTTON':
             html = document.createElement('button');
             html.id = options.name;

@@ -36,7 +36,9 @@ export function loginForm() {
             sessionStorage.removeItem('token');
             location.reload();
         })
-        userwrapper.append(wrapper, button);
+        const row = document.createElement('hr');
+
+        userwrapper.append(wrapper, button, row);
 
     }
 }

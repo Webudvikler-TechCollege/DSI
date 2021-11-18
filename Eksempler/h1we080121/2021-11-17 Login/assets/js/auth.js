@@ -23,7 +23,7 @@ const Auth = async () => {
     
     const data = await myFetch('https://api.mediehuset.net/token', options);
 
-    sessionStorage.setItem('token', JSON.stringify(data));
+   localStorage.setItem('token', JSON.stringify(data));
 }
 
 
@@ -31,7 +31,7 @@ document.querySelector('#sendLogin').addEventListener('click', () => {
    Auth();
 })
 
-const loginData = JSON.parse(sessionStorage.getItem('token'));
+const loginData = JSON.parse(localStorage.getItem('token'));
 
 if(loginData && loginData.username) {
     console.log(`Du er logget ind som ${loginData.username}`);

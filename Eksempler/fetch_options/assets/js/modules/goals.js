@@ -35,6 +35,8 @@
  export async function goalDetails(goal_id) {
     const data = await myFetch(`https://api.mediehuset.net/sdg/goals/${goal_id}`);
 
+    sessionStorage.setItem('goal_id', goal_id);
+
     const detailwrapper = document.querySelector('.detail-wrapper');
     detailwrapper.innerHTML = null;
 

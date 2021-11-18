@@ -84,7 +84,7 @@ Hvis vi skal kalde et endpoint som kræver en token skal vi benytte *authorizati
 
 ```js
 const getProctectedData = async () => {
-    const token = sessionStorage.getItem('token');
+    const token = JSON.parse(sessionStorage.getItem('token'));
 
     const options = {
         method: 'GET',
