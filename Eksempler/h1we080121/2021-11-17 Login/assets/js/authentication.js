@@ -1,3 +1,8 @@
+/**
+ * Authentification Module
+ * Tjekker brugers login og viser login form / logout 
+ */
+
 // Importerer funktion modules
 import { CommentList } from "./comments.js";
 import { myFetch } from "./helper.js";
@@ -22,10 +27,8 @@ const logoutHtml = `<div>
                         <p>Du er logget på som brugernavn</p>
                         <button id="logout">Log out</button>
                     </div>`;
-/**
- * Funktions variabel Auth
- * Tjekker brugers login og viser login form / logout 
- */
+
+// Auth function constant definition                    
 const Auth = async () => {
     // Henter auth info fra session storage
     const loginData = sessionStorage.getItem('authInfo');
