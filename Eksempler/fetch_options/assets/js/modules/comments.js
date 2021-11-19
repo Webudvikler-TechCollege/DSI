@@ -17,6 +17,7 @@ export async function commentList(goal_id) {
         }
     }
     const data = await myFetch(`https://api.mediehuset.net/sdg/comments/${goal_id}`, options);
+    console.log(data);
 
     if(document.querySelector('.comment-wrapper')) {
         document.querySelector('.comment-wrapper').remove();

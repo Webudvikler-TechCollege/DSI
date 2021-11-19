@@ -25,6 +25,7 @@
     try {
         const response = await fetch(url, options);
         const result = await response.json();
+        result.response = response;
         return result;    
     }
     catch(err) {

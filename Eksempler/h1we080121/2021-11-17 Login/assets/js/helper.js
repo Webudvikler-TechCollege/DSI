@@ -20,6 +20,12 @@ export const myFetch = async (url, options = null) => {
         }
         // Parse respons som json
         const result = await response.json();
+        // Gemmer response info i object key response
+        result.response = {
+            ok : response.ok,
+            status : response.status,
+            statusText : response.statusText
+        }
         // Reterner resultat
         return result;            
     }

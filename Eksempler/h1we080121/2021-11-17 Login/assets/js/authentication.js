@@ -74,17 +74,18 @@ const Auth = async () => {
             }
 
             // Fetcher api endpoint med url og options
-            const data = await myFetch('https://api.mediehuset.net/token', options);
-
+            const url = 'https://api.mediehuset.net/token';
+            const data = await myFetch(url, options);
+            console.log(data);
             // Hvis der ikke er en fejl meddelse i responsen
-            if(!data.message) {
+            if(data.response.ok) {
                 // Gemmer json object som string i sessions storage
                 sessionStorage.setItem('authInfo', JSON.stringify(data));
                 // Reloader side
                 location.reload();    
             } else {
                 // Propmter fejl besked
-                alert('Kunne ikke logge ind!')
+                form.insertAdjacentHTML('afterend', '<p>Kunne ikke logge ind.</p>')
             }
 
         })
