@@ -24,14 +24,14 @@ const loginHtml = `<form method="post">
 
 // deklarerer konstant til logout button html 
 const logoutHtml = `<div>
-                        <p>Du er logget på som brugernavn</p>
+                        <p id="login-status"></p>
                         <button id="logout">Log out</button>
                     </div>`;
 
 // Auth function constant definition                    
 const Auth = async () => {
     // Henter auth info fra session storage
-    const loginData = sessionStorage.getItem('authInfo');
+    const loginData = JSON.parse(sessionStorage.getItem('authInfo'));
     // Henter root html element
     const root = document.querySelector('#root');
 
@@ -76,13 +76,14 @@ const Auth = async () => {
             // Fetcher api endpoint med url og options
             const url = 'https://api.mediehuset.net/token';
             const data = await myFetch(url, options);
-            console.log(data);
+            console.log('Logger ind...');
             // Hvis der ikke er en fejl meddelse i responsen
             if(data.response.ok) {
                 // Gemmer json object som string i sessions storage
                 sessionStorage.setItem('authInfo', JSON.stringify(data));
                 // Reloader side
-                location.reload();    
+                //location.reload();
+                Auth();
             } else {
                 // Propmter fejl besked
                 form.insertAdjacentHTML('afterend', '<p>Kunne ikke logge ind.</p>')
@@ -94,6 +95,8 @@ const Auth = async () => {
         root.innerHTML = logoutHtml;
         // Henter logout knap ud som js objekt
         const button = root.querySelector('button');
+        // Sætter login status besked
+        root.querySelector('#login-status').innerText = `Du er logget på som ${loginData.username}`;
 
         // Sætter click event på button 
         button.addEventListener('click', () => {
@@ -101,8 +104,9 @@ const Auth = async () => {
             if(confirm('Vil du logge ud?')) {
                 // Sletter data i session storage
                 sessionStorage.removeItem('authInfo');
+                console.log('Logger ud...');
                 // Reloader site
-                location.reload();
+                Auth();
             }
         })
     }
