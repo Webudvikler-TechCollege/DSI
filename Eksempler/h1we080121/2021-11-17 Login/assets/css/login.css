@@ -1,6 +1,14 @@
-fieldset {
+.list-wrapper {
+  padding: 1% 0;
+  margin: 1% 0;
+  border-top: solid 1px #000;
+  border-bottom: solid 1px #000;
+}
+
+table {
+  width: 100%;
   border: solid 1px #000;
-  border-radius: 5px;
-  color: #f00;
+}
+table * {
   border: solid 1px #000;
 }/*# sourceMappingURL=login.css.map */

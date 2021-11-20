@@ -76,14 +76,12 @@ const Auth = async () => {
             // Fetcher api endpoint med url og options
             const url = 'https://api.mediehuset.net/token';
             const data = await myFetch(url, options);
-            console.log('Logger ind...');
             // Hvis der ikke er en fejl meddelse i responsen
             if(data.response.ok) {
                 // Gemmer json object som string i sessions storage
                 sessionStorage.setItem('authInfo', JSON.stringify(data));
-                // Reloader side
-                //location.reload();
-                Auth();
+                // Reloader function Auth
+                location.reload();
             } else {
                 // Propmter fejl besked
                 form.insertAdjacentHTML('afterend', '<p>Kunne ikke logge ind.</p>')
@@ -104,9 +102,8 @@ const Auth = async () => {
             if(confirm('Vil du logge ud?')) {
                 // Sletter data i session storage
                 sessionStorage.removeItem('authInfo');
-                console.log('Logger ud...');
-                // Reloader site
-                Auth();
+                // Reloader Auth funktion
+                location.reload();
             }
         })
     }
@@ -116,3 +113,4 @@ const Auth = async () => {
 Auth();
 // Kalder CommentList
 CommentList();
+
