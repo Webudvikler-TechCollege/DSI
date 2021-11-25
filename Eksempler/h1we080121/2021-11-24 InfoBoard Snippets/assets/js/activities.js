@@ -1,38 +1,63 @@
-import { convert2Timezone, myFetch } from "./helper.js";
+/**
+ * JS Modul til aktiviteter
+ */
 
-const update_frequency = 3600;
-const root = document.querySelector('#root');
+// Imports
+import { myFetch } from "./helper.js";
 
+// Settings
+const update_frequency = 3600; // Antal sekunder til ny update
+const root = document.querySelector('#root'); // Root element 
+
+/**
+ * Funktion til at hente og præsentere aktiviteter med 
+ */
 export const getActivityData = async () => {
+
+    // Henter data fra localStorage
     let data = JSON.parse(localStorage.getItem('activity_data'));
-    let update = (localStorage.getItem('activity_update')) ?
-                     new Date(localStorage.getItem('activity_update')) : new Date();
+    let update = new Date(localStorage.getItem('activity_update'));
 
+    // Henter aktuelle datotid
     let curdate = new Date();
-    console.log(curdate);
+    // Beregner antal sekunder siden sidste update
+    let diff_seconds = Math.round((curdate.getTime() - update.getTime()) / 1000);
 
-    let diff_seconds = Math.round((curdate.getTime() - update.getTime())/1000);
-
-    if(!data || diff_seconds > update_frequency) {
+    // Hvis data er false eller tid siden sidste update er overskredet
+    if (!data || diff_seconds > update_frequency) {
+        // Henter data fra api 
         const url = 'https://iws.itcn.dk/techcollege/Schedules?departmentCode=smed&$orderBy=StartDate';
         const result = await myFetch(url);
-        data = result.value;    
+        data = result.value;
 
+        // Filtrerer data fdor uønskede uddannelser
         data = data.filter(elm => elm.Education !== 'Bager/konditor');
 
+        // Mapper data array
         data.map(item => {
+            // Fikser tidszone problem i startdato
             item.StartDate = item.StartDate.replace("+01:00", "+00:00");
+            // Friendly replace på uddannelse
             item.Education = replaceEducation(item.Education);
+            // Friendly replace på fag
             item.Subject = replaceSubject(item.Subject);
         })
 
-        data.sort((a,b) => a.Education.localeCompare(b.Education));
+        // Sorterer data array efter startdate og education
+        data.sort((a, b) => {
+            if (a.StartDate === b.StartDate) {
+                return a.Education < b.Education ? -1 : 1
+            } else {
+                return a.StartDate < b.StartDate ? -1 : 1
+            }
+        })
 
+        // Gemmer data og update dato i localstorage
         localStorage.setItem('activity_data', JSON.stringify(data));
-        localStorage.setItem('activity_update', new Date());        
+        localStorage.setItem('activity_update', new Date());
     }
 
-
+    // Bygger html table
     let acc_html = `<table border="0">
                     <tr>
                       <th>Kl.</th>
@@ -43,24 +68,33 @@ export const getActivityData = async () => {
                     </tr>
     `;
 
+    // Looper data
     data.map(item => {
+        // Kalder startdate som JS date objekt
         let item_date = new Date(item.StartDate);
 
+        // Sætter tidsformat til time:minut på property item.Time
         let hours = String(item_date.getHours()).padStart(2, '0');
         let minutes = String(item_date.getMinutes()).padStart(2, '0');
-
         item.Time = `${hours}:${minutes}`;
-        //console.log(item);
 
-        if(item_date > curdate) {
+        // Betinger at aktivitetstid er større end nu
+        if (item_date > curdate) {
             acc_html += createRow(item);
         }
     })
+    // Lukker table tag
     acc_html += '</table>';
+    // Indsætter table html i root element
     root.innerHTML = acc_html;
 
 }
 
+/**
+ * Returnerer html table row og data 
+ * @param {Object} item 
+ * @returns {String} Table row and data
+ */
 function createRow(item) {
     return `<tr>
               <td>${item.Time}</td>
@@ -72,9 +106,14 @@ function createRow(item) {
     `
 }
 
+/**
+ * Udskifter fag koder med navn
+ * @param {String} subject 
+ * @returns {String} friendly name
+ */
 const replaceSubject = subject => {
     let friendly = '';
-    switch(subject) {
+    switch (subject) {
         default:
             friendly = subject;
             break;
@@ -104,16 +143,21 @@ const replaceSubject = subject => {
         case 'ggrafikopgaver':
             friendly = 'Adobe Illustrator';
             break;
-            case 'andre trykmetod':
+        case 'andre trykmetod':
             friendly = 'Andre trykmetoder';
             break;
     }
     return friendly;
 }
 
+/**
+ * Udskifter uddannelses koder med navn
+ * @param {String} education 
+ * @returns {String} friendly name
+ */
 const replaceEducation = education => {
     let friendly = '';
-    switch(education) {
+    switch (education) {
         default:
             friendly = education;
             break;
