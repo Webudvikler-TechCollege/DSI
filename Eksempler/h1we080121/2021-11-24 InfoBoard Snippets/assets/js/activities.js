@@ -93,7 +93,7 @@ export const getActivityData = async () => {
 /**
  * Returnerer html table row og data 
  * @param {Object} item 
- * @returns {String} Table row and data
+ * @returns {String} html
  */
 function createRow(item) {
     return `<tr>
