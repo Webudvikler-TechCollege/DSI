@@ -1,9 +1,9 @@
 # Express Router
-Selvom Node leveres med et indbyggede moduler til at arbejde med HTTP og HTTPS, og endda HTTP/2, er disse moduler relativt begrænsede i deres funktioner.
+Selvom Node leveres med et indbyggede moduler til at arbejde med HTTP og HTTPS, er disse moduler relativt begrænsede i deres funktioner.
 
 Men der findes nogle populære server frameworks som er rigtig gode værktøjer når vi skal arbejde med servere i Node.
 
-Et af de mest populære hedder **Express**.
+Et af de mest populære hedder *Express*.
 
 Guiden her vil vise dig hvordan du opsætter en server med Express i dit node.js projekt. Guiden tager udgangspunkt i det projekt du lige har sat med node.js.
 ___

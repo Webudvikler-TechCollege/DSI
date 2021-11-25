@@ -16,6 +16,10 @@ export const CommentList = async () => {
     // Betinger at loginData er sand
     if(loginData && loginData.access_token) {
 
+        if(root.querySelector('.list-wrapper')) {
+            root.querySelector('.list-wrapper').remove();
+        }
+
         // Deklarerer options objekt med GET og auth headers
         const options = {
             method: 'GET',
@@ -28,6 +32,15 @@ export const CommentList = async () => {
         const url = 'https://api.mediehuset.net/sdg/comments';
         const data = await myFetch(url, options);
         data.items.reverse();
+
+        // Opretter button element til at tilføje nye kommentarer
+        const button = document.createElement('button');
+        button.innerText = 'Opret ny kommentar';
+        // Sætter event på knap som kalder CommentForm
+        button.addEventListener('click', () => {
+            commentForm();
+        })
+        root.append(button);
 
         // Opretter wrapper element
         const listwrapper = document.createElement('div');
@@ -90,15 +103,6 @@ export const CommentList = async () => {
         listwrapper.append(table);
         // Tilføjer table til root element
         root.append(listwrapper);
-
-        // Opretter button element til at tilføje nye kommentarer
-        const button = document.createElement('button');
-        button.innerText = 'Opret ny kommentar';
-        // Sætter event på knap som kalder CommentForm
-        button.addEventListener('click', () => {
-            commentForm();
-        })
-        root.append(button);
 
     } else {
         console.log('Kan ikk hent list');
