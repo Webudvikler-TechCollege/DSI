@@ -3,7 +3,7 @@
  */
 
 // Imports
-import { dayDateMonth2local, myFetch } from "./helper.js";
+import { myFetch } from "./helper.js";
 
 // Globale vars
 const root = document.querySelector('#root'); // Root element
@@ -30,13 +30,12 @@ export const getActivityData = async () => {
     // Hvis data er false eller tid siden sidste update er overskredet
     if (!data || seconds_to_update > config.max_seconds_to_last_update) {
         // Henter data fra api 
-        //const url = 'https://iws.itcn.dk/techcollege/Schedules?departmentCode=smed';
-        const url = './assets/data/data.json';
+        const url = 'https://iws.itcn.dk/techcollege/Schedules?departmentCode=smed';
         const result = await myFetch(url);
         data = result.value;
 
         // Filtrerer data fdor uønskede uddannelser
-        data = data.filter(elm => arr_valid_educations.includes(elm.Education));
+        data = data.filter(elm => config.array_valid_educations.includes(elm.Education));
 
         // Mapper data array
         data.map(item => {
@@ -74,7 +73,7 @@ export const getActivityData = async () => {
         localStorage.setItem('activity_update', new Date());
     }
 
-    // Bygger html table
+    // Bygger akkumuleret (opsamlende) html
     let acc_html = `<table border="0">
                     <tr>
                       <th>Kl.</th>
@@ -85,17 +84,21 @@ export const getActivityData = async () => {
                     </tr>
     `;
 
-    // Henter dags datos aktiviteter 
+    // Henter dags datos aktiviteter ind i array arr_subjects
     let arr_subjects = [];
     arr_subjects.push(...data.filter(elm => elm.Stamp >= cur_stamp && elm.Stamp < nextday_stamp));    
 
-    // Henter næste dags aktiviteter
+    // Henter næste dags aktiviteter ind i array arr_nextday_subjects
     let arr_nextday_subjects = [];
     arr_nextday_subjects.push(...data.filter(elm => elm.Stamp >= nextday_stamp));
 
-    // Tilføj næste dags dato og aktiviteter hvis der er nogle
+    // Tilføj næste dags dato og aktiviteter til arr_subjects hvis der er nogle
     if(arr_nextday_subjects.length) {
-        arr_subjects.push({ day: dayDateMonth2local(arr_nextday_subjects[0].StartDate) })
+        // Lokal formatering af dato med toLocalDateString
+        let next_day_friendly = new Date(arr_nextday_subjects[0].StartDate).toLocaleDateString(
+            "da-DK", { weekday: "long", day: 'numeric', month: "long"}
+        );
+        arr_subjects.push({ day: next_day_friendly })
         arr_subjects.push(...arr_nextday_subjects);
     }
 
@@ -106,17 +109,18 @@ export const getActivityData = async () => {
 
     // Looper data
     arr_subjects.map(item => {
+        // Hvis object item har property Team...
         if(item.Team) {
-            // Udskriv række med aktivitets info hvis property Teams eksisterer
+            // Tilføj table row med aktivitet til acc_tml
             acc_html += createRow(item);
         } else {
-            // Udskriv række med dato 
+            // Tilføj table row med dato til acc_html
             acc_html += createDayRow(item);
         }
     })
     // Lukker table tag
     acc_html += '</table>';
-    // Indsætter table html i root element
+    // Indsætter html string i root element
     root.innerHTML = acc_html;
 
 }
@@ -187,6 +191,9 @@ const replaceSubject = subject => {
             break;
         case 'andre trykmetod':
             friendly = 'Andre trykmetoder';
+            break;
+        case 'graf prod work3':
+            friendly = 'Grafisk Produktion';
             break;
     }
     return friendly;
