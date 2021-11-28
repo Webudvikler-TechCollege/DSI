@@ -21,8 +21,8 @@ export const getActivityData = async () => {
 
     // Henter dags dato + næste dag i sekunder
     let curdate = new Date();
-    let cur_stamp = Math.round(curdate.getTime()/1000);
-    let nextday_stamp = Math.round(curdate.setHours(0, 0, 0, 0)/1000) + 86400;    
+    let cur_stamp = Math.round(curdate.getTime() / 1000);
+    let nextday_stamp = Math.round(curdate.setHours(0, 0, 0, 0) / 1000) + 86400;
 
     // Beregner antal sekunder siden sidste update
     let seconds_to_update = Math.round((curdate.getTime() - update.getTime()) / 1000);
@@ -31,32 +31,42 @@ export const getActivityData = async () => {
     if (!data || seconds_to_update > config.max_seconds_to_last_update) {
         // Henter data fra api 
         const url = 'https://iws.itcn.dk/techcollege/Schedules?departmentCode=smed';
+        //const url = './assets/js/data.json'; // URL til at teste med lokalt
         const result = await myFetch(url);
         data = result.value;
+
+        // Henter friendly names på emner
+        const friendly_names = await myFetch('https://api.mediehuset.net/infoboard/subjects');
+        const arr_friendly_names = friendly_names.result;
 
         // Filtrerer data fdor uønskede uddannelser
         data = data.filter(elm => config.array_valid_educations.includes(elm.Education));
 
         // Mapper data array
-        data.map(item => {
+        data.map(async item => {
             // Fikser tidszone problem i startdato
             item.StartDate = item.StartDate.replace("+01:00", "+00:00");
 
             // Sætter tidsformat til time:minut på property item.Time
             item.Time = new Date(item.StartDate).toLocaleTimeString(
                 'en-GB', {
-                    hour: '2-digit',
-                    minute: '2-digit'
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            // Udskifter tekniske betegnelser med læsevenlige i Subject og Education
+            arr_friendly_names.map(word => {
+                if(word.name === item.Education) {
+                    item.Education = word.friendly_name;
                 }
-            );
+                if(word.name === item.Subject) {
+                    item.Subject = word.friendly_name;
+                }
+            })
 
             // Sætter property Stamp til aktivitetens tid i antal sekunder
-            item.Stamp = Math.round(new Date(item.StartDate).getTime()/1000);
+            item.Stamp = Math.round(new Date(item.StartDate).getTime() / 1000);
 
-            // Friendly replace på uddannelse
-            item.Education = replaceEducation(item.Education);
-            // Friendly replace på fag
-            item.Subject = replaceSubject(item.Subject);
         })
 
         // Sorterer data array efter startdate og education
@@ -69,8 +79,8 @@ export const getActivityData = async () => {
         })
 
         // Gemmer data og update dato i localstorage
-        localStorage.setItem('activity_data', JSON.stringify(data));
-        localStorage.setItem('activity_update', new Date());
+        //localStorage.setItem('activity_data', JSON.stringify(data));
+        //localStorage.setItem('activity_update', new Date());
     }
 
     // Bygger akkumuleret (opsamlende) html
@@ -86,33 +96,35 @@ export const getActivityData = async () => {
 
     // Henter dags datos aktiviteter ind i array arr_subjects
     let arr_subjects = [];
-    arr_subjects.push(...data.filter(elm => elm.Stamp >= cur_stamp && elm.Stamp < nextday_stamp));    
+
+    arr_subjects.push(...data.filter(elm => elm.Stamp >= cur_stamp && elm.Stamp < nextday_stamp));
 
     // Henter næste dags aktiviteter ind i array arr_nextday_subjects
     let arr_nextday_subjects = [];
     arr_nextday_subjects.push(...data.filter(elm => elm.Stamp >= nextday_stamp));
 
     // Tilføj næste dags dato og aktiviteter til arr_subjects hvis der er nogle
-    if(arr_nextday_subjects.length) {
+    if (arr_nextday_subjects.length) {
         // Lokal formatering af dato med toLocalDateString
         let next_day_friendly = new Date(arr_nextday_subjects[0].StartDate).toLocaleDateString(
-            "da-DK", { weekday: "long", day: 'numeric', month: "long"}
+            "da-DK", { weekday: "long", day: 'numeric', month: "long" }
         );
         arr_subjects.push({ day: next_day_friendly })
         arr_subjects.push(...arr_nextday_subjects);
     }
 
     // Begrænser antal aktiviteter - hent alle hvis 0
-    if(config.max_num_activities) {
-        arr_subjects = arr_subjects.slice(0,config.max_num_activities);
+    if (config.max_num_activities) {
+        arr_subjects = arr_subjects.slice(0, config.max_num_activities);
     }
 
     // Looper data
     arr_subjects.map(item => {
+
         // Hvis object item har property Team...
-        if(item.Team) {
+        if (item.Team) {
             // Tilføj table row med aktivitet til acc_tml
-            acc_html += createRow(item);
+            acc_html += createRow(item);            
         } else {
             // Tilføj table row med dato til acc_html
             acc_html += createDayRow(item);
