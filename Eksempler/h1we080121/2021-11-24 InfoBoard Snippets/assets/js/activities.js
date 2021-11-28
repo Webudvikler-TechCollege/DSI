@@ -43,7 +43,7 @@ export const getActivityData = async () => {
         data = data.filter(elm => config.array_valid_educations.includes(elm.Education));
 
         // Mapper data array
-        data.map(async item => {
+        data.map(item => {
             // Fikser tidszone problem i startdato
             item.StartDate = item.StartDate.replace("+01:00", "+00:00");
 
@@ -79,8 +79,8 @@ export const getActivityData = async () => {
         })
 
         // Gemmer data og update dato i localstorage
-        //localStorage.setItem('activity_data', JSON.stringify(data));
-        //localStorage.setItem('activity_update', new Date());
+        localStorage.setItem('activity_data', JSON.stringify(data));
+        localStorage.setItem('activity_update', new Date());
     }
 
     // Bygger akkumuleret (opsamlende) html
