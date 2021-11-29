@@ -35,14 +35,13 @@ app.get("/", (req, res) => {
      res.send('Hej verden!');
 });
 ```
-I ovenstående eksempel er der sat en listener på vores root url (/) som første argument på get metoden. Det andet argument modtager en funktion med argumenterne req og res - ligesom i http modulet.
+I ovenstående eksempel er der sat en listener på vores root url (skråstreg i gåseøjne) som første argument på get metoden. Det andet argument modtager en funktion med argumenterne req (request) og res (response) - ligesom i http modulet.
 
-I Express kan vi bruge metoden send til at udskrive vores html med - istedet for write og end  i http modulet.
+I Express kan vi bruge metoden `send` til at udskrive vores html med - istedet for write og end  i http modulet.
 
 Nu kan vi begynde at sætte flere listeners op til andre sider i vores projekt:
-
+```js
 const express = require('express');
-
 const app = express();
 
 app.get("/", (req, res) => {
@@ -60,14 +59,15 @@ app.get('/contact', (req, res) => {
 app.listen(4242, () => {
       console.log("Express server kører....");
 });
+```
 Når du har gemt og kørt ovenstående med en node kommando, kan du prøve at kalde sitet i din browser med følgende adresser:
-
+```
 http://localhost:4242/
 
 http://localhost:4242/about
 
 http://localhost:4242/contact
-
+```
 Det gode ved disse url'er er, at de er semantiske og dermed ganske SEO venlige.
 
 Vil du læse mere om mulighederne i Express kan du finde masser af dokumentation her på https://expressjs.com/
