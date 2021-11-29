@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.animation-area {
+  background: linear-gradient(to left, #ffffff96, #ffffffc4);
+  width: 100%;
+  height: 100vh;
+}
+.animation-area .box-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 99;
+}
+.animation-area .box-area li {
+  position: absolute;
+  display: block;
+  list-style: none;
+  -webkit-animation: animate 5s linear;
+          animation: animate 5s linear;
+  bottom: -150px;
+  color: rgba(46, 46, 46, 0.466);
+}
+
+@-webkit-keyframes animate {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-800px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-800px) rotate(360deg);
+    opacity: 0;
+  }
+}/*# sourceMappingURL=animate.css.map */
