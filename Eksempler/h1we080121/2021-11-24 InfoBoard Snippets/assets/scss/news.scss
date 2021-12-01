@@ -1,0 +1,28 @@
+/* Styles for news marquee */
+
+.marquee {
+    overflow: hidden;
+    display: flex;
+    padding: 5px 0px;
+    height: 20px;
+    div {
+        animation: marquee 20s linear infinite;
+    }
+    span {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 0.8rem;
+        &:nth-child(odd) {
+            margin: 0 1%;
+        }
+    }
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+  

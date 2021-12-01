@@ -1,0 +1,22 @@
+/* Styles for news marquee */
+
+* {
+    box-sizing: border-box;
+}
+
+table {
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+    border-spacing: 0px;
+    border-collapse: separate;
+    border-top: solid 1px #000;
+    border-left: solid 1px #000;
+
+    th, td {
+        text-align: left;
+        border-bottom: solid 1px #000;
+        border-right: solid 1px #000;
+        padding: 1%;
+    }
+}
