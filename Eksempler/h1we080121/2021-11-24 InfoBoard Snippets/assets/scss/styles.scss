@@ -1,17 +1,21 @@
 table {
+    position: relative;
+    z-index: 1000;
     width: 100%;
     border-spacing: 0px;
     border-collapse: separate;
     border-top: solid 1px #000;
     border-left: solid 1px #000;
 
+    /*
     tr:nth-child(odd) {
         background-color: beige;
     }
-
     th {
         background-color: bisque;
     }
+    */
+    
 
     th, td {
         text-align: left;

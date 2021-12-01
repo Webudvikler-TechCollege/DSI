@@ -29,11 +29,22 @@ export const getActivityData = async () => {
 
     // Hvis data er false eller tid siden sidste update er overskredet
     if (!data || seconds_to_update > config.max_seconds_to_last_update) {
+        let url, result;
+
         // Henter data fra api 
-        const url = 'https://iws.itcn.dk/techcollege/Schedules?departmentCode=smed';
+        url = 'https://iws.itcn.dk/techcollege/Schedules?departmentCode=smed';
         //const url = './assets/js/data.json'; // URL til at teste med lokalt
-        const result = await myFetch(url);
+        result = await myFetch(url);
         data = result.value;
+
+        // Kald til AMU + Brobyg
+        /*
+        url = `https://iws.itcn.dk/techcollege/schedules?departmentCode=med`;
+        result = await myFetch(url);
+        let amu_data = result.value;
+        data = await data.concat(amu_data.filter(elm => elm.Education === 'AMU indmeld'));
+        */
+
 
         // Henter friendly names på emner
         const friendly_names = await myFetch('https://api.mediehuset.net/infoboard/subjects');
@@ -63,6 +74,8 @@ export const getActivityData = async () => {
                     item.Subject = word.friendly_name;
                 }
             })
+
+
 
             // Sætter property Stamp til aktivitetens tid i antal sekunder
             item.Stamp = Math.round(new Date(item.StartDate).getTime() / 1000);
