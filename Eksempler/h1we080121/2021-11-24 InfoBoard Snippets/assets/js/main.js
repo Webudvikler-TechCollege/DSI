@@ -3,7 +3,7 @@
  * importerede js funktioner. 
  */
 import { getActivityData } from "./activities.js";
-import { getBusPlan } from "./busplan.js";
+import { getNews, Marquee } from "./news.js";
 
 /**
  * Sætter interval til at kalde funktion getBusPlan 
@@ -17,3 +17,4 @@ setInterval(() => {
 */
 
 getActivityData();
+getNews();

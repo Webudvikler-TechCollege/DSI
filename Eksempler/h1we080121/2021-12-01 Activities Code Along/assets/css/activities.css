@@ -1,3 +1,14 @@
 * {
   box-sizing: border-box;
+}
+
+table {
+  width: 100%;
+}
+table th, table td {
+  border: solid 1px #000;
+}
+table .dayname {
+  font-weight: bold;
+  text-transform: capitalize;
 }/*# sourceMappingURL=activities.css.map */
