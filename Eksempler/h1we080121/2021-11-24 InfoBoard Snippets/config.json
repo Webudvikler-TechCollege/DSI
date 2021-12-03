@@ -1,6 +1,6 @@
 {
     "max_seconds_to_last_update": 3600,
-    "max_num_activities": 5,
+    "max_num_activities": 10,
     "array_valid_educations": [
         "AMU indmeld",
         "Brobyg teknisk",

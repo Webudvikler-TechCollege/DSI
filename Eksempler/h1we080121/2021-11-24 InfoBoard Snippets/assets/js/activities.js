@@ -49,10 +49,10 @@ export const getActivityData = async () => {
         // Henter friendly names på emner
         const friendly_names = await myFetch('https://api.mediehuset.net/infoboard/subjects');
         const arr_friendly_names = friendly_names.result;
+        console.log(data);
 
         // Filtrerer data fdor uønskede uddannelser
         data = data.filter(elm => config.array_valid_educations.includes(elm.Education));
-
         // Mapper data array
         data.map(item => {
             // Fikser tidszone problem i startdato
@@ -74,8 +74,6 @@ export const getActivityData = async () => {
                     item.Subject = word.friendly_name;
                 }
             })
-
-
 
             // Sætter property Stamp til aktivitetens tid i antal sekunder
             item.Stamp = Math.round(new Date(item.StartDate).getTime() / 1000);

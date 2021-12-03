@@ -21,20 +21,20 @@ table th, table td {
 
 /* Styles for news marquee */
 .marquee {
-  overflow: hidden;
-  display: flex;
-  padding: 5px 0px;
-  height: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 0.8rem;
+  position: relative;
+  z-index: 900;
+  padding: 5px 0;
 }
-.marquee div {
+.marquee p {
   -webkit-animation: marquee 20s linear infinite;
           animation: marquee 20s linear infinite;
 }
-.marquee span {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 0.8rem;
+.marquee p span {
+  white-space: nowrap;
 }
-.marquee span:nth-child(odd) {
+.marquee p span:nth-child(odd) {
   margin: 0 1%;
 }
 

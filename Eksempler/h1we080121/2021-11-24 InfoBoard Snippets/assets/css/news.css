@@ -1,0 +1,36 @@
+/* Styles for news marquee */
+.marquee {
+  overflow: hidden;
+  display: flex;
+  padding: 5px 0px;
+  height: 20px;
+}
+.marquee p {
+  -webkit-animation: marquee 20s linear infinite;
+          animation: marquee 20s linear infinite;
+}
+.marquee p span {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 0.8rem;
+}
+.marquee p span:nth-child(odd) {
+  margin: 0 1%;
+}
+
+@-webkit-keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}/*# sourceMappingURL=news.css.map */

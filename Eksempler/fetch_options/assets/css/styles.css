@@ -3,36 +3,23 @@
 }
 
 main {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 2fr 4fr 2fr;
-      grid-template-columns: 2fr 4fr 2fr;
+  grid-template-columns: 2fr 4fr 2fr;
   grid-gap: 10px;
 }
 
 .list-wrapper {
   border: solid 1px #000;
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto auto;
-      grid-template-columns: auto auto;
+  grid-template-columns: auto auto;
 }
-
 .list-wrapper > div {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   cursor: pointer;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
-
 .list-wrapper > div figure {
   width: 100%;
   max-width: 50px;
@@ -42,7 +29,6 @@ main {
   padding: 0 5%;
   border: solid 1px #000;
 }
-
 .detail-wrapper img {
   width: 100%;
 }
@@ -51,26 +37,21 @@ main {
   padding: 5%;
   border: solid 1px #000;
 }
-
 .user-wrapper .comment-wrapper .comment {
   margin-bottom: 5%;
   padding-bottom: 5%;
   border-bottom: solid 1px #999;
 }
-
 .user-wrapper .comment-wrapper .comment span {
   display: block;
 }
-
 .user-wrapper .comment-wrapper .comment .date,
 .user-wrapper .comment-wrapper .comment .author {
   font-size: 0.8rem;
 }
-
 .user-wrapper .comment-wrapper .comment .title {
   font-weight: 600;
 }
-
 .user-wrapper .comment-wrapper .comment .author {
   color: red;
 }
@@ -78,10 +59,8 @@ main {
 .modal-wrapper {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.95);
-  -webkit-box-shadow: 0px 0px 5px #000;
-          box-shadow: 0px 0px 5px #000;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-shadow: 0px 0px 5px #000;
+  box-sizing: border-box;
   border: solid 10px #000;
   border-radius: 3px;
   width: 50%;
@@ -105,12 +84,10 @@ input {
   color: blue;
   cursor: pointer;
 }
-
 .actions a :hover {
   color: red;
 }
 
 .active {
   display: block;
-}
-/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles.css.map */

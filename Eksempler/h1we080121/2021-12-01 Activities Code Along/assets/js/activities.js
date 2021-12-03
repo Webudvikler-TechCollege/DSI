@@ -3,7 +3,7 @@ import { myFetch } from "./helpers/helper.js";
 const root = document.getElementById('root');
 
 export const getActivityData = async () => {
-	let config = await myFetch('../../config.json');
+	let config = await myFetch('./config.json');
 
 	let data = JSON.parse(localStorage.getItem('activities'));
 	let last_update = new Date(localStorage.getItem('last_update'));

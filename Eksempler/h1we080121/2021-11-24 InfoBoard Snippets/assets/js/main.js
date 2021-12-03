@@ -3,6 +3,7 @@
  * importerede js funktioner. 
  */
 import { getActivityData } from "./activities.js";
+import { getBusPlan } from "./busplan.js";
 import { getNews } from "./news.js";
 
 /**
@@ -16,5 +17,6 @@ setInterval(() => {
 },30000)
 */
 
+getBusPlan();
 getActivityData();
 getNews();

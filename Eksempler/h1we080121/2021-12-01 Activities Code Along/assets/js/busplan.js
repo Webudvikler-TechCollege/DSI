@@ -1,4 +1,4 @@
-import { myFetch } from './helper.js';
+import { myFetch } from './helpers/helper.js';
 
 export const getBusPlan = async () => {
     // Henter data

@@ -1,10 +1,7 @@
 .list-wrapper {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto auto auto auto;
-      grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto auto auto;
 }
-
 .list-wrapper > div {
   border: solid 1px #000;
   width: 200px;
@@ -14,11 +11,9 @@
   color: #fff;
   cursor: pointer;
 }
-
 .list-wrapper > div h2 {
   text-align: center;
 }
-
 .list-wrapper > div div {
   margin: auto;
   width: 50px;
@@ -36,5 +31,4 @@
 
 .active {
   display: block;
-}
-/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles.css.map */

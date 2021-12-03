@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;EACZ,MAAM,EAAE,cAAc;EACtB,MAAM,EAAE,IAAI;EACZ,QAAQ,EAAE,QAAQ;EAClB,GAAG,EAAE,CAAC;EACN,IAAI,EAAE,CAAC;EACP,OAAO,EAAE,EAAE;EACX,gBAAgB,EAAE,wBAAwB;EAC1C,UAAU,EAAE,UAAU;EACtB,OAAO,EAAE,IAAI;CAKhB;;AAhBD,AAaI,UAbM,CAaN,GAAG,CAAC;EACA,SAAS,EAAE,KAAK;CACnB",
-    "sources": [
-        "../assets/goals.scss"
-    ],
-    "names": [],
-    "file": "goals.css"
-}
+{"version":3,"sources":["../assets/goals.scss"],"names":[],"mappings":"AAAA;EACI,WAAA;EACA,YAAA;EACA,sBAAA;EACA,YAAA;EACA,kBAAA;EACA,MAAA;EACA,OAAA;EACA,WAAA;EACA,0CAAA;EACA,sBAAA;EACA,aAAA;AACJ;AACI;EACI,gBAAA;AACR","file":"goals.css"}
