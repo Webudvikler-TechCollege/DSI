@@ -1,8 +1,8 @@
 import { getActivityData } from "./activities.js";
 import { getBusPlan } from "./busplan.js";
 
-getBusPlan();
-//getActivityData();
+//getBusPlan();
+getActivityData();
 
 /*
 setInterval(() => {

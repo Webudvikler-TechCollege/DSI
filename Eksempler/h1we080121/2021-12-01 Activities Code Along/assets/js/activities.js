@@ -16,8 +16,8 @@ export const getActivityData = async () => {
 	let seconds_since_last_update = Math.round((curday - last_update) / 1000);
 
 	if(!data || seconds_since_last_update > config.max_seconds_to_last_update) {
-		//const url = 'https://iws.itcn.dk/techcollege/Schedules?departmentCode=smed';
-		const url = './data.json';
+		const url = 'https://iws.itcn.dk/techcollege/Schedules?departmentCode=smed';
+		//const url = './data.json';
 		const result = await myFetch(url);
 		data = result.value;
 
