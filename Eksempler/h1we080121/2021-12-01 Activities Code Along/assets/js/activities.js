@@ -36,10 +36,10 @@ export const getActivityData = async () => {
 				});
 
 			array_friendly_names.map(word => {
-				if(word.name === item.Education) {
+				if(word.name.toUpperCase() === item.Education.toUpperCase()) {
 					item.Education = word.friendly_name;
 				}
-				if(word.name === item.Subject) {
+				if(word.name.toUpperCase() === item.Subject.toUpperCase()) {
 					item.Subject = word.friendly_name;
 				} 
 			})

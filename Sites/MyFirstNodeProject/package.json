@@ -8,5 +8,8 @@
   },
   "type": "module",
   "author": "Heinz K 2021",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }

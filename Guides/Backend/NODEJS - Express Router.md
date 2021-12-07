@@ -69,5 +69,13 @@ http://localhost:4242/about
 http://localhost:4242/contact
 ```
 Det gode ved disse url'er er, at de er semantiske og dermed ganske SEO venlige.
+___
+## Page not found
+Du kan også oprette en route som vises, når en side ikke kan findes:
+```js
+app.use((req, res, next) => {
+    res.status(404).send("Siden blev ikke fundet")
+})
+```
 
 Vil du læse mere om mulighederne i Express kan du finde masser af dokumentation her på https://expressjs.com/
