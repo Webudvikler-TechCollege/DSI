@@ -1,25 +1,18 @@
 import express from 'express';
+import dotenv from 'dotenv';
+import { router as SongRouter } from './Routes/song.router.js';
+import { router as ArtistRouter } from './Routes/artist.router.js';
 
-const app = express();
+// Kalder environment vars
+dotenv.config();
 
-app.get('/', (req, res) => {
-	res.send('Velkommen til forsiden');
-})
+const port = process.env.PORT || 3030;
 
-app.get('/about', (req, res) => {
-	res.send('Om os...');
-})
+const app = new express();
 
-app.get('/products', (req, res) => {
-	res.send('Produktliste');
-})
+app.use(SongRouter);
+app.use(ArtistRouter);
 
-// Handling non matching request from the client
-app.use((req, res, next) => {
-    res.status(404).send(
-        "Siden blev ikke fundet")
-})
-
-app.listen(4000, () => {
-	console.log('Server is running on port 4000...')
+app.listen(port, () => {
+	console.log(`Server kører på port ${port}`);
 })
