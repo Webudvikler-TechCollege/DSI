@@ -1,0 +1,12 @@
+{
+  "name": "myfirstnodeproject",
+  "version": "1.0.0",
+  "description": "Eksempel på et node projekt",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "author": "Heinz K 2021",
+  "license": "ISC"
+}
