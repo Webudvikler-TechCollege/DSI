@@ -7,13 +7,17 @@ class SongController {
 	}
 
 	list = async (req, res) => {
-		console.log('Method songcontroller list is loaded');
 		const result = await model.list(req, res);
 		res.json(result);
 	}
 
 	get = async (req, res) => {
 		const result = await model.get(req, res);
+		res.json(result);
+	}
+
+	create = async (req, res) => {
+		const result = await model.create(req, res);
 		res.json(result);
 	}
 }

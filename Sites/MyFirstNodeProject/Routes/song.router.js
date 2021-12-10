@@ -7,5 +7,6 @@ const controller = new SongController();
 // Kalder routes med controller metoder
 router.get('/api/songs', (req, res) => { controller.list(req, res)});
 router.get('/api/songs/:id([0-9]*)', (req, res) => { controller.get(req, res)});
+router.post('/api/songs', (req, res) => { controller.create(req, res)});
 
 export { router }
