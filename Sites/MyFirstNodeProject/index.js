@@ -14,5 +14,5 @@ app.use(SongRouter);
 app.use(ArtistRouter);
 
 app.listen(port, () => {
-	console.log(`Server kører på port ${port}`);
+	console.log(`Server kører på port http://localhost:${port}`);
 })

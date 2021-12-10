@@ -1,9 +1,15 @@
-import http from 'http';
+import express from 'express';
+import dotenv from 'dotenv';
+import SongRouter from './Routes/song.router.js';
 
-http.createServer((request, response) => {
-    response.writeHead(200, {'Content-Type': 'text/html'});
-    response.write('Hello World!');
-    response.end();
-}).listen(4000);
+dotenv.config();
 
+const app = express();
+const port = process.env.PORT || 4000;
+
+app.use(SongRouter);
+
+app.listen(port, () => {
+    console.log(`Server kører på http://localhost:${port}`);
+})
 
