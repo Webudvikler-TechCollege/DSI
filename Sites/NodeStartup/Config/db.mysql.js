@@ -2,7 +2,7 @@ import mysql from 'mysql';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const db = mysql.createConnection({
+const connection = mysql.createConnection({
 	connectionLimit: 10,
 	password: process.env.DB_PASSWORD,
 	user: process.env.DB_USER,
@@ -11,7 +11,11 @@ const db = mysql.createConnection({
 	port: process.env.DB_PORT
 })
 
-db.connect();
+connection.connect((err) => {
+	if(err) {
+		throw err;
+	}
+	console.log('MySQL Connected');
+});
 
-export default db;
-
+export default connection;
