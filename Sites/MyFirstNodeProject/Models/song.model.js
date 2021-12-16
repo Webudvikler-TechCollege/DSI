@@ -70,7 +70,38 @@ class SongModel {
 				}
 			})
 		})
-	}	
+	}
+	
+	search = (req, res) => {
+		return new Promise((resolve, reject) => {
+			const arrValues = [];
+			for(let i = 1; i <= 2; i++) {
+				arrValues.push(`%${req.query.keyword}%`)
+			}
+	
+			const sql = `SELECT s.id, s.title, a.name AS artist   
+							FROM song s 
+							JOIN artist a 
+							ON s.artist_id = a.id 
+							WHERE s.title LIKE ? 
+							OR s.content LIKE ?`
+
+			let arrSimpleValues = [
+									`%${req.query.keyword}%`, 
+									`%${req.query.keyword}%`
+								]							
+			db.query(sql, arrSimpleValues, (err, result) => {
+				if(err) {
+					reject(err);
+				} else {
+					resolve(result);
+				}
+			})
+	
+		})
+		
+	}
+
 }
 
 export default SongModel;

@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import SongRouter from './Routes/song.router.js';
-import ArtistRouter from './Routes/artist.router.js';
+import { router } from './Routes/init.router.js';
 
 dotenv.config();
 
@@ -11,8 +11,8 @@ app.use(express.urlencoded({ extended: true }))
 
 const port = process.env.PORT || 4000;
 
+app.use(router);
 app.use(SongRouter);
-app.use(ArtistRouter);
 
 app.listen(port, () => {
     console.log(`Server kører på http://localhost:${port}`);
