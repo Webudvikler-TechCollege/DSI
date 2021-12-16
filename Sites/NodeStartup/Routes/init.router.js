@@ -3,6 +3,7 @@ import { sequelize } from "../Config/db.config.js";
 const router = express.Router();
 
 import SongModel from '../Models/song.model.sq.js';
+import ArtistModel from '../Models/artist.model.sq.js';
 
 router.get('/init', (req, res) => {
     try {

@@ -1,8 +1,5 @@
 import SongModel from '../Models/song.model.sq.js'
-import ArtistModel from "../Models/artist.model.sq.js";
 
-ArtistModel.hasMany(SongModel);
-SongModel.belongsTo(ArtistModel);
 class SongController {
 	constructor() {}
 
@@ -10,7 +7,7 @@ class SongController {
 		const result = await SongModel.findAll({
             //limit: 2,
             order: ['title'],
-            include: ArtistModel
+            include: Artist
         });
 		res.send(result);
 	}
