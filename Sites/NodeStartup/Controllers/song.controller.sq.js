@@ -9,10 +9,11 @@ class SongController {
 	list = async (req, res) => {
 		const result = await SongModel.findAll({
             //limit: 2,
+            attributes: ['id','title'],
             order: ['title'],
             include: {
                 model: ArtistModel,
-                attributes: ['name']
+                attributes: ['id','name']
             }
         });
 		res.send(result);

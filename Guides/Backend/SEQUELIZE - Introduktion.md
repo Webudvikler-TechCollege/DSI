@@ -9,6 +9,10 @@ For at installere Sequelize skal du indsætte følgende i din terminal:
 ```
 % npm install --save sequelize
 ```
+Du skal også manuelt installere driveren til den valgte database. I vores tilfælde er det npm modulet *mysql2*:
+```
+% npm installer --save mysql2
+```
 ___
 ## Sådan forbinder du til din database:
 Du kan indsætte følgende i en config fil og importere den der hvor du har brug for at etablere en forbindelse til dsin database:
