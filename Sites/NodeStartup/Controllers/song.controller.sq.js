@@ -10,7 +10,10 @@ class SongController {
 		const result = await SongModel.findAll({
             //limit: 2,
             order: ['title'],
-            include: ArtistModel
+            include: {
+                model: ArtistModel,
+                attributes: ['name']
+            }
         });
 		res.send(result);
 	}
