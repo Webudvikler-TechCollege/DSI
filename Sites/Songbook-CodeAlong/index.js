@@ -6,7 +6,7 @@ import { router as ArtistRouter } from './Routes/artist.router.js';
 // Kalder environment vars
 dotenv.config();
 
-const port = process.env.PORT || 3030;
+const port = process.env.PORT || 3000;
 
 const app = new express();
 app.use(express.urlencoded({
