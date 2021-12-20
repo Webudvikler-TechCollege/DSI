@@ -9,9 +9,9 @@ class UserController {
 		const orderby = req.query.orderby || 'id'
 		const limit = req.query.limit || 1000
 		const result = await UserModel.findAll({
-			attributes: ['id', 'firstname', 'lastname'],
-			limit: Number(limit),
-			order: [orderby]
+			attributes: ['id', 'firstname', 'lastname'], // Felter
+			limit: Number(limit), // Limit
+			order: [orderby] // Sortering
 		})
 		res.json(result)
 	}
@@ -40,7 +40,7 @@ class UserController {
 		if(firstname && lastname && email && password && id) {
 			const model = await UserModel.update(req.body, { 
 				where: { id: id },
-				individualHooks: true
+				individualHooks: true // Tiollader update hook
 			})
 			return res.json({ status: true })
 		} else {

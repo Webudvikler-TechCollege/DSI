@@ -33,11 +33,16 @@ UserModel.init({
 		defaultValue: 0
 	}
 }, {
+	// Db instance
 	sequelize, 
+	// Modellens navn
 	modelName: 'user',
+	// Hold tabelnavne til ental
 	freezeTableName: true,
+	// Udskift camelcase med underscores
 	underscored: true,
-	hooks: {
+	// Hooks til data behandling før/efter kald af model
+	hooks: { 
 		beforeCreate: async (user, options) => {
 			user.password = await createHash(user.password)
 		}, 
@@ -47,6 +52,11 @@ UserModel.init({
 	}
 })
 
+/**
+ * Genererer hash string ud fra bcrypt
+ * @param {String} string 
+ * @returns hashed string
+ */
 const createHash = async string => {
     const salt = await bcrypt.genSalt(10);
     const hashed_string = await bcrypt.hash(string, salt);

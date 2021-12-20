@@ -8,9 +8,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
+
+// App settings to provide access to request body data
 app.use(express.urlencoded({ extended: true }))
 
-// App Settings to ensure CORS
+// App Settings to ensure CORS Access from browser
 app.use((req, res, next) => {
 	res.append('Access-Control-Allow-Origin', ['*']);
 	res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
