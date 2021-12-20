@@ -8,6 +8,7 @@ const controller = new SongController();
 
 /* Song Routes Begin */
 router.get('/api/song', (req, res) => { controller.list(req, res) })
+router.get('/api/song/search', (req, res) => { controller.search(req, res) })
 router.get('/api/song/:id([0-9]*)', (req, res) => { controller.get(req, res) })
 router.post('/api/song', (req, res) => { controller.create(req, res) })
 router.put('/api/song', (req, res) => { controller.update(req, res) })

@@ -1,5 +1,7 @@
+import { Sequelize } from 'sequelize';
 import SongModel from '../Models/song.model.js';
 import ArtistModel from '../Models/artist.model.js';
+const Op = Sequelize.Op;
 
 ArtistModel.hasMany(SongModel)
 SongModel.belongsTo(ArtistModel)
@@ -20,12 +22,26 @@ class SongController {
 				attributes: ['id', 'name']
 			}
 		})
+		res.json(result)
+	}
 
-		/*
-		header("Content-Type: application/json; charset=UTF-8");
-		header("Access-Control-Allow-Origin: *");		
-		*/
-		res.set()
+	search = async (req,res) => {
+		const result = await SongModel.findAll({
+			where: {
+				title: {
+					[Op.like]: `%${req.query.keyword}%`
+				},
+				content: {
+					[Op.like]: `%${req.query.keyword}%`
+				}
+			},
+			attributes: ['id', 'title'],
+			include: { 
+				model: ArtistModel,
+				attributes: ['id', 'name']
+			}
+
+		})
 		res.json(result)
 	}
 

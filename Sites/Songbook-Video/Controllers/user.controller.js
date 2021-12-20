@@ -38,7 +38,10 @@ class UserController {
 		const { firstname, lastname, email, password, id } = req.body;
 
 		if(firstname && lastname && email && password && id) {
-			const model = await UserModel.update(req.body, { where: { id: id }})
+			const model = await UserModel.update(req.body, { 
+				where: { id: id },
+				individualHooks: true
+			})
 			return res.json({ status: true })
 		} else {
 			res.send(418)
