@@ -40,7 +40,7 @@ class UserController {
 		if(firstname && lastname && email && password && id) {
 			const model = await UserModel.update(req.body, { 
 				where: { id: id },
-				individualHooks: true // Tiollader update hook
+				individualHooks: true // Tillader update hook
 			})
 			return res.json({ status: true })
 		} else {
