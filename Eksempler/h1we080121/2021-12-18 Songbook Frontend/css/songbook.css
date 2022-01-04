@@ -1,5 +1,25 @@
+header {
+  border-bottom: solid 5px #000;
+  margin-bottom: 20px;
+}
+
 table {
-  border: solid 1px #000;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  width: 100%;
+}
+table th {
+  background-color: black;
+  color: white;
+}
+table th, table tr, table td {
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+}
+table td, table th {
+  padding: 3px 5px;
 }
 
 a {

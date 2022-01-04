@@ -1,38 +1,74 @@
-/**
- * Fil med specifikke funktioner 
- * Bruges til verdensmål
- */
-
 /* Importerer myFetch funktion fra helper fil */
 import { myFetch } from './helper.js';
-
 const main = document.querySelector('main');
 
 /**
- * Funktionsvariabel til at hente liste af mål
+ * Funktionsvariabel til at hente liste 
  */
 const getSongList = async () => {
-    // Kalder data
-    const data = await myFetch('http://localhost:4000/api/song');
+    // Sætter var med API endpoint
+    let strUrl = 'http://localhost:4000/api/song';
+    // Henter GET params
+    const urlParams = new URLSearchParams(window.location.search);
+    // Sætter var til array params
+    const arrParams = [];
 
-    const table = document.createElement('table');
+    // Tjekker om orderby eller limit er sat
+    if(urlParams.has('orderby') || urlParams.has('limit')) {
+        // Tilføjer query string til url
+        strUrl += '?'
+        
+        // Tilføjer orderby + direction hvis de er sat
+        if(urlParams.has('orderby')) {
+            arrParams.push(`orderby=${urlParams.get('orderby')}`);
+            if(urlParams.has('dir')) {
+                arrParams.push(`dir=${urlParams.get('dir')}`);
+            }
+        }
+        // Tilføjer limit hvis denne er sat 
+        if(urlParams.has('limit')) {
+            arrParams.push(`limit=${urlParams.get('limit')}`);
+        }
+    }
+    // Bygger endpoint url med string og join metode
+    const strEndpoint = strUrl += arrParams.join('&')
+    // Kalder fetch med endpoint
+    const data = await myFetch(strEndpoint)
+
+    const div = document.createElement('div')
+    div.classList.add('listwrapper')
+
+    const h2 = document.createElement('h2')
+    h2.innerText = 'Oversigt'
+    div.append(h2);
+
+    const table = document.createElement('table')
     const trow = document.createElement('tr')
 
     const th1 = document.createElement('th')
-    th1.innerText = 'Titel'
+    th1.innerText = 'ID'
     trow.append(th1)
+
     const th2 = document.createElement('th')
-    th2.innerText = 'Handling'
+    th2.innerText = 'Titel'
     trow.append(th2)
+
+    const th3 = document.createElement('th')
+    th3.innerText = 'Handling'
+    trow.append(th3)
 
     table.append(trow)
 
     // Mapper data
     data.map(function (item, key) {
         // Definerer div wrapper
-        const trow = document.createElement('tr');
+        const trow = document.createElement('tr')
 
-        const tdata1 = document.createElement('td');
+        const tdata1 = document.createElement('td')
+        tdata1.innerText = item.id
+        trow.append(tdata1)
+
+        const tdata2 = document.createElement('td')
 
         // Definerer anchor tag med tekst og click event
         const link = document.createElement('a');
@@ -44,36 +80,50 @@ const getSongList = async () => {
         })
 
         // Appender link og wrapper
-        tdata1.append(link);
-        trow.append(tdata1);
+        tdata2.append(link);
+        trow.append(tdata2);
 
-        const tdata2 = document.createElement('td');
+        const tdata3 = document.createElement('td');
 
         const edit = document.createElement('a');
         edit.classList.add('edit')
         edit.addEventListener('click', () => {
             editSong(item.id)
         })
-        tdata2.append(edit)
+        tdata3.append(edit)
 
         const del = document.createElement('a');
         del.classList.add('del')
         del.addEventListener('click', () => {
-            deleteSong(item.id)
+            if(confirm(`Vil du slette sangen ${item.title} fra sangbogen?`)) {
+                deleteSong(item.id)                
+            }
         })
-        tdata2.append(del)
-        trow.append(tdata2);
+        tdata3.append(del)
+        trow.append(tdata3);
         table.append(trow)
 
     })
-    main.append(table)
+    div.append(table)
+    main.append(div)
 }
 
-/* Funktionskald til at hente liste med mål */
+/* Funktionskald til liste */
 getSongList();
 
+const getSearchResult = async () => {
+    const keyword = document.querySelector('#keyword').value
+    // Sætter var med API endpoint
+    let strUrl = `http://localhost:4000/api/song/search?keyword=${keyword}`
+    const data = await myFetch(strUrl)
+}
+
+document.querySelector('#search').addEventListener('click', () => {
+    getSearchResult()
+})
+
 /**
- * Funktionsvariabel til at hente mål detaljer
+ * Funktionsvariabel til at hente detaljer
  * @param {number} song_id 
  */
 const getSongDetails = async song_id => {
@@ -97,30 +147,24 @@ const getSongDetails = async song_id => {
     pre.innerHTML = data.content;
     div.append(pre);
 
-
     main.append(div)
 }
 
+/**
+ * Funktionsvariabel til at slette
+ * @param {number} song_id 
+ */
 const deleteSong = async song_id => {
-    console.log(song_id);
     reset();
 
     let options = {
-        type: 'DELETE'
+        method: 'DELETE'
     }
 
     // Kalder data
-    const data = await myFetch(`http://localhost:4000/api/song/${song_id}`);
+    const data = await myFetch(`http://localhost:4000/api/song/${song_id}`, options);
 
-    const div = document.createElement('div');
-    div.classList.add('messagewrapper')
-
-    const p = document.createElement('p');
-    p.innerText = 'Sangen blev slettet';
-    div.append(p);
-
-    main.append(div)
-
+    window.location.reload()
 }
 
 function reset() {
