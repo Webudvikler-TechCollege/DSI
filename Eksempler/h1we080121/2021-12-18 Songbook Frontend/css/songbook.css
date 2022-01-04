@@ -1,3 +1,11 @@
+table {
+  border: solid 1px #000;
+}
+
+a {
+  cursor: pointer;
+}
+
 .edit {
   background-repeat: no-repeat;
   width: 16px;

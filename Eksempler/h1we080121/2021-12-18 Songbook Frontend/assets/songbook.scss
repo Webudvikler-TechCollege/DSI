@@ -5,6 +5,14 @@
     display: inline-block;
 }
 
+table {
+    border: solid 1px #000;
+}
+
+a {
+    cursor: pointer
+}
+
 .edit {
     @include anchorblock;
     background-image: url('../assets/images/icons/pencil.svg');
