@@ -57,13 +57,19 @@ const getSongDetails = async song_id => {
 
     const div = document.createElement('div');
     div.classList.add('detailwrapper')
+
     const h2 = document.createElement('h2')
     h2.innerText = data.title;
     div.append(h2)    
 
+    const h3 = document.createElement('h3')
+    h3.innerHTML = data.artist.name;
+    div.append(h3);
+
     const pre = document.createElement('pre')
     pre.innerHTML = data.content;
     div.append(pre);
+
 
     main.append(div)
 }
