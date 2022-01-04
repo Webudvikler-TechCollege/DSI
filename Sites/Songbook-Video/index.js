@@ -7,6 +7,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const port = process.env.PORT || 4000;
+
 const app = express();
 
 // App settings to provide access to request body data
@@ -19,8 +21,6 @@ app.use((req, res, next) => {
 	res.append('Access-Control-Allow-Headers', 'Content-Type');
 	next();
 })
-
-const port = process.env.PORT || 4000;
 
 app.use(InitRouter);
 app.use(UserRouter);

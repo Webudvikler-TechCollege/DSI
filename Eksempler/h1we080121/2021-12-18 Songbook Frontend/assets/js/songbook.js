@@ -6,6 +6,8 @@
 /* Importerer myFetch funktion fra helper fil */
 import { myFetch } from './helper.js';
 
+const main = document.querySelector('main');
+
 /**
  * Funktionsvariabel til at hente liste af mål
  */
@@ -22,7 +24,6 @@ const getSongList = async () => {
 
     // Mapper data
     data.map(function(item, key) {
-        console.log(item);
         // Definerer div wrapper
         const wrapper = document.createElement('li');
         
@@ -37,7 +38,7 @@ const getSongList = async () => {
 
         // Appender link og wrapper
         wrapper.append(link);
-        document.querySelector('.songbook').append(wrapper);
+        main.append(wrapper);
     }) 
 }
 
@@ -46,40 +47,27 @@ getSongList();
 
 /**
  * Funktionsvariabel til at hente mål detaljer
- * @param {number} goal_id 
+ * @param {number} song_id 
  */
-const getSongDetails = async goal_id => {
+const getSongDetails = async song_id => {
+    reset();
+
     // Kalder data
-    const data = await myFetch(`https://api.mediehuset.net/sdg/goals/${goal_id}`);
+    const data = await myFetch(`http://localhost:4000/api/song/${song_id}`);
 
-    // Kalder modal element til objekt modal
-    const modal = document.querySelector('.goalmodal');
-    // Nulstiller indhold i modal
-    modal.innerHTML = '';
+    const div = document.createElement('div');
+    div.classList.add('detailwrapper')
+    const h2 = document.createElement('h2')
+    h2.innerText = data.title;
+    div.append(h2)    
 
-    // Definerer titel element
-    const title = document.createElement('h1');
-    title.innerText = data.item.title;
+    const pre = document.createElement('pre')
+    pre.innerHTML = data.content;
+    div.append(pre);
 
-    // Definerer div element til svg html
-    const icon = document.createElement('div');
-    icon.innerHTML = data.item.icon;
+    main.append(div)
+}
 
-    // Henter svg ind som et js dom objekt 
-    const svg = icon.querySelector('svg');
-    svg.style.fill = `#${data.item.color}`;
-
-    // Definerer button element med innerText og click event
-    const button = document.createElement('button');
-    button.innerText = 'Close';
-    button.addEventListener('click', () => {
-        modal.style.display = 'none';
-    })
-
-    // Appender elementer til modal objekt
-    modal.append(title, icon, button);
-    // Sætter modal's display til block
-    modal.style.display = 'block';
-
-
+function reset() {
+    main.innerHTML = '';
 }
