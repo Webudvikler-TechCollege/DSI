@@ -11,7 +11,8 @@ class SongController {
 
 	/* Song Controller Methods Begin */
 	list = async (req, res) => {
-		const orderby = req.query.orderby || 'id'
+		const orderby = [req.query.orderby || 'id']
+		orderby.push(req.query.dir || 'ASC')
 		const limit = req.query.limit || 1000
 		const result = await SongModel.findAll({
 			attributes: ['id', 'title'],

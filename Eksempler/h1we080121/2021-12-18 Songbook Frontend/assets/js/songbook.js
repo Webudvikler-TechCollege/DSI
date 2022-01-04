@@ -13,14 +13,7 @@ const main = document.querySelector('main');
  */
 const getSongList = async () => {
     // Kalder data
-
-    const fetchHeaders = new Headers();
-    fetchHeaders.append("Accept", "application/json");
-
-    const options = {
-        headers: fetchHeaders
-    }
-    const data = await myFetch('http://localhost:4000/api/song?orderby=title', options);
+    const data = await myFetch('http://localhost:4000/api/song');
 
     // Mapper data
     data.map(function(item, key) {
@@ -38,6 +31,21 @@ const getSongList = async () => {
 
         // Appender link og wrapper
         wrapper.append(link);
+
+        const edit = document.createElement('a');
+        edit.classList.add('edit')
+        edit.addEventListener('click', () => {
+            editSong(item.id)
+        })
+        wrapper.append(edit)
+
+        const del = document.createElement('a');
+        del.classList.add('del')
+        del.addEventListener('click', () => {
+            deleteSong(item.id)
+        })
+        wrapper.append(del)
+
         main.append(wrapper);
     }) 
 }
@@ -72,6 +80,27 @@ const getSongDetails = async song_id => {
 
 
     main.append(div)
+}
+
+const deleteSong = async song_id => {
+
+    let options = {
+        type: 'DELETE'
+    }
+
+     // Kalder data
+     const data = await myFetch(`http://localhost:4000/api/song/${song_id}`);
+     
+     const div = document.createElement('div');
+     div.classList.add('messagewrapper')
+     
+     const p = document.createElement('p');
+     p.innerText = 'Sangen blev slettet';
+     div.append(p);
+
+
+
+   
 }
 
 function reset() {
