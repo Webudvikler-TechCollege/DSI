@@ -6,32 +6,42 @@ const main = document.querySelector('main');
  * Funktionsvariabel til at hente liste 
  */
 const getSongList = async () => {
-    // Sætter var med API endpoint
-    let strUrl = 'http://localhost:4000/api/song';
+    reset()
+    // Deklarerer url var
+    let strUrl;
     // Henter GET params
     const urlParams = new URLSearchParams(window.location.search);
     // Sætter var til array params
     const arrParams = [];
 
+    // Tjekker om keyword er sat i url params og definerer endpoint url
+    if (urlParams.has('keyword')) {
+        strUrl = `http://localhost:4000/api/song/search`
+        arrParams.push(`keyword=${urlParams.get('keyword')}`)
+    } else {
+        strUrl = 'http://localhost:4000/api/song';
+    }
+
     // Tjekker om orderby eller limit er sat
-    if(urlParams.has('orderby') || urlParams.has('limit')) {
+    if (urlParams.has('orderby') || urlParams.has('limit') || urlParams.has('keyword')) {
         // Tilføjer query string til url
         strUrl += '?'
-        
+
         // Tilføjer orderby + direction hvis de er sat
-        if(urlParams.has('orderby')) {
+        if (urlParams.has('orderby')) {
             arrParams.push(`orderby=${urlParams.get('orderby')}`);
-            if(urlParams.has('dir')) {
+            if (urlParams.has('dir')) {
                 arrParams.push(`dir=${urlParams.get('dir')}`);
             }
         }
         // Tilføjer limit hvis denne er sat 
-        if(urlParams.has('limit')) {
+        if (urlParams.has('limit')) {
             arrParams.push(`limit=${urlParams.get('limit')}`);
         }
     }
     // Bygger endpoint url med string og join metode
     const strEndpoint = strUrl += arrParams.join('&')
+    console.log(strEndpoint);
     // Kalder fetch med endpoint
     const data = await myFetch(strEndpoint)
 
@@ -95,8 +105,8 @@ const getSongList = async () => {
         const del = document.createElement('a');
         del.classList.add('del')
         del.addEventListener('click', () => {
-            if(confirm(`Vil du slette sangen ${item.title} fra sangbogen?`)) {
-                deleteSong(item.id)                
+            if (confirm(`Vil du slette sangen ${item.title} fra sangbogen?`)) {
+                deleteSong(item.id)
             }
         })
         tdata3.append(del)
@@ -107,20 +117,6 @@ const getSongList = async () => {
     div.append(table)
     main.append(div)
 }
-
-/* Funktionskald til liste */
-getSongList();
-
-const getSearchResult = async () => {
-    const keyword = document.querySelector('#keyword').value
-    // Sætter var med API endpoint
-    let strUrl = `http://localhost:4000/api/song/search?keyword=${keyword}`
-    const data = await myFetch(strUrl)
-}
-
-document.querySelector('#search').addEventListener('click', () => {
-    getSearchResult()
-})
 
 /**
  * Funktionsvariabel til at hente detaljer
@@ -170,3 +166,5 @@ const deleteSong = async song_id => {
 function reset() {
     main.innerHTML = '';
 }
+
+export { getSongList, getSongDetails, deleteSong }
