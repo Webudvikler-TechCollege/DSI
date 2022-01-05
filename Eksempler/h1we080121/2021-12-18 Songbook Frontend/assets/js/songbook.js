@@ -39,6 +39,8 @@ const getSongList = async () => {
             arrParams.push(`limit=${urlParams.get('limit')}`);
         }
     }
+
+    console.log(arrParams.join('&'));
     // Bygger endpoint url med string og join metode
     const strEndpoint = strUrl += arrParams.join('&')
     console.log(strEndpoint);
