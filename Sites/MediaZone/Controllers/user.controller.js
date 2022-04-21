@@ -2,9 +2,11 @@ import UserModel from "../Models/user.model.js";
 import TeamModel from "../Models/team.model.js";
 import UserGroupModel from "../Models/usergroup.model.js";
 
+// En til mange relation til teams
 TeamModel.hasMany(UserModel, { foreignKey: 'team_id'});
 UserModel.belongsTo(TeamModel, { foreignKey: 'team_id'});
 
+// Mange til mange relation til usergroups
 UserModel.belongsToMany(UserGroupModel, {
   through: "usergroup_rel",
   foreignKey: "user_id"
@@ -15,14 +17,16 @@ class UserController {
 
   list = async (req, res) => {
     const result = await UserModel.findAll({
-      //limit: 2,
       order: ["firstname"],
-      include: [
+      // Inkluderer relationsdata - sættes i array når der er flere
+      include: [ 
         {
+          // Team
           model: TeamModel,
-          attributes: ["name"]
+          attributes: ["name"] // Attributter er de felter
         },
         {
+          // Usergroups
           model: UserGroupModel,
           attributes: ["id", "name"]
         }
@@ -33,7 +37,21 @@ class UserController {
 
   get = async (req, res) => {
     try {
-      const result = await UserModel.findAll({ where: { id: req.params.id } });
+      const result = await UserModel.findAll({ 
+        where: { id: req.params.id },
+        include: [ 
+          {
+            // Team
+            model: TeamModel,
+            attributes: ["name"] // Attributter er de felter
+          },
+          {
+            // Usergroups
+            model: UserGroupModel,
+            attributes: ["id", "name"]
+          }
+        ]  
+      });
       return res.json(result);
     } catch (err) {
       return res.send(err);

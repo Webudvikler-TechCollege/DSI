@@ -5,7 +5,7 @@ class TeamController {
 
 	list = async (req, res) => {
 		const result = await TeamModel.findAll({
-            //limit: 2,            
+            //limit: 2,             
             order: ['name']
         });
 		res.send(result);
