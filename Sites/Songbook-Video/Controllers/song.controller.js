@@ -58,24 +58,26 @@ class SongController {
 	}
 
 	create = async (req, res) => {
+		console.log(req.body);
 		const { title, content, artist_id } = req.body;
 
 		if(title && content && artist_id) {
 			const model = await SongModel.create(req.body)
 			return res.json({ newid: model.id})
 		} else {
-			res.send(418)
+			res.sendStatus(418)
 		}
 	}
 
 	update = async (req, res) => {
+		console.dir(req.body);
 		const { title, content, artist_id, id } = req.body;
 
 		if(title && content && artist_id && id) {
 			const model = await SongModel.update(req.body, { where: { id: id }})
 			return res.json({ status: true })
 		} else {
-			res.send(418)
+			res.sendStatus(418)
 		}
 	}	
 
