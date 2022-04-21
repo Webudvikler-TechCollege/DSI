@@ -4,6 +4,7 @@ import EventRouter from './Routes/event.router.js';
 import UserRouter from './Routes/user.router.js';
 import UserGroupRouter from './Routes/usergroup.router.js';
 import TeamRouter from './Routes/team.router.js';
+import AuthRouter from './Routes/auth.router.js';
 import { router } from './Routes/init.router.js';
 
 dotenv.config();
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }))
 const port = process.env.PORT || 4000;
 
 app.use(router);
+app.use(AuthRouter);
 app.use(EventRouter);
 app.use(UserRouter);
 app.use(UserGroupRouter);

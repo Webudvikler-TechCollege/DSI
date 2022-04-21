@@ -65,7 +65,7 @@ class UserController {
       const model = await UserModel.create(req.body);
       return res.json({ newid: model.id });
     } else {
-      return res.send(418);
+      return res.sendStatus(418);
     }
   };
 
@@ -73,7 +73,10 @@ class UserController {
     const { firstname, lastname, email, password, team_id, id } = req.body;
 
     if (firstname && lastname && email && password && id) {
-      await UserModel.update(req.body, { where: { id: id } });
+      await UserModel.update(req.body, { 
+        where: { id: id },
+        individualHooks: true // Tillader update hook
+      });
       return res.sendStatus(200);
     } else {
       return res.send(418);
