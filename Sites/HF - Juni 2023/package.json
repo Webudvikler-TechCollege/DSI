@@ -1,0 +1,27 @@
+{
+  "name": "hf-node-maj-2023",
+  "version": "1.0.0",
+  "description": "Code Along Site med NodeJS",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Webudvikler-TechCollege/hf-node-maj-2023.git"
+  },
+  "keywords": [
+    "node",
+    "tutorial"
+  ],
+  "author": "Heinz K",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Webudvikler-TechCollege/hf-node-maj-2023/issues"
+  },
+  "homepage": "https://github.com/Webudvikler-TechCollege/hf-node-maj-2023#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

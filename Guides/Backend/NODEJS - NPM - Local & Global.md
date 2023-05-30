@@ -11,7 +11,6 @@ Når du installerer en pakke globalt med "npm -g", gemmes den i en bestemt mappe
 Det er vigtigt at bemærke, at når du bruger "-g" flaget, skal du have passende tilladelser til at installere globale pakker på dit system. På nogle systemer, som f.eks. Linux, kræver det muligvis administratorrettigheder (eller brugen af sudo) for at kunne installere pakker globalt.
 
 Eksempel:
-
-`
+```
 npm install -g nodemon
-`
+```
