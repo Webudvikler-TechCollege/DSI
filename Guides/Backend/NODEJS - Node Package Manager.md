@@ -32,16 +32,15 @@ NPM følger automatisk med når du har installeret node.
 
 Du kan tjekke om npm er installeret ved at skrive følgende i kommandolinien:
 ```
-~$ npm
+npm
 ```
 Du kan også tjekke versionsnummeret af din npm ved at tilføje -v:
 ```
-~$ npm -v
+npm -v
 ```
 ### Opdatering af NPM
 NPM bliver hyppigere opdateret end node så det er en god ide at få det gjort en gang i mellem. Det kan du gøre med følgende kommando:
 ```
-~$ npm install -g npm
+npm install -g npm
 ```
 Og ja - npm kan bruges til at opdatere sig selv :)
-
