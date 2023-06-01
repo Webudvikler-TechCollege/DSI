@@ -1,4 +1,5 @@
 import express from 'express'
+import { postRouter } from './Routes/post.router.js';
 
 const app = express()
 
@@ -6,12 +7,11 @@ app.get("/", (req, res) => {
 	res.send("Velkommen til min NodeJS app");
 })
 
-app.get("/about", (req, res) => {
-	res.send("Læs om min Node.JS app");
-})
+app.use(postRouter)
+
 
 app.use((req, res) => {
-    res.status(404).send("Siden blev ikke fundet")
+    res.status(404).send("Siden blev ikke fundet!")
 })
 
 app.listen(4242, () => {
