@@ -1,5 +1,8 @@
 import express from 'express'
 import { postRouter } from './Routes/post.router.js';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app = express()
 
@@ -9,11 +12,10 @@ app.get("/", (req, res) => {
 
 app.use(postRouter)
 
-
 app.use((req, res) => {
     res.status(404).send("Siden blev ikke fundet!")
 })
 
-app.listen(4242, () => {
-	console.log('Server kører på port 4242: http://localhost:4242')	
+app.listen(process.env.PORT, () => {
+	console.log(`Server kører på http://localhost:${process.env.PORT}`)	
 })
