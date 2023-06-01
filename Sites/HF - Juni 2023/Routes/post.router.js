@@ -12,6 +12,7 @@ postRouter.get('/posts', (req, res) => {
 // Route med POST method - opretter
 postRouter.post('/posts', (req, res) => {
 	// Henter form body data på res objektet og "sender" (udskriver) til browser
+	// Du kan logge req.body og se alle forespørgelsens form data 
 	res.send(`
 		${req.body.firstname} ${req.body.lastname}
 		${req.body.address}
