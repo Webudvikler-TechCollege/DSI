@@ -1,4 +1,5 @@
 // Importerer dependencies
+import { log } from 'console'
 import express from 'express'
 
 // Deklarerer var til router
@@ -6,6 +7,9 @@ const postRouter = express.Router()
 
 // Route med GET method - henter
 postRouter.get('/posts', (req, res) => {
+	// Get parametre hentes på request objektets query property
+	console.log(req.query)
+	
 	res.send('Hent alle poster')
 })
 
