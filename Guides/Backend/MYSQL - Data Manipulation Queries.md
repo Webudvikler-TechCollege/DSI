@@ -1,6 +1,5 @@
-# MYSQL - Data Manipulation Queries
+# MYSQL - SELECT
 
-## 1. SELECT
 Vi bruger SELECT til at **hente** data med.
 
 Når vi henter data kan vi vælge at hente data fra et eller flere felter og fra en eller flere rækker.
