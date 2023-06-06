@@ -1,6 +1,10 @@
 // Importerer dependencies
 import express from 'express'
 import { postRouter } from './Routes/post.router.js';
+import db from './Config/mysql.config.js';
+db.query('SELECT * FROM song', (err, result) => {
+	console.log(result);
+})
 
 // Importerer og sætter dotenv til globale vars
 import dotenv from 'dotenv'
