@@ -1,16 +1,21 @@
 // Importerer dependencies
-import { log } from 'console'
 import express from 'express'
-
+import SongController from '../Controllers/song.controller.js'
+ 
 // Deklarerer var til router
 const postRouter = express.Router()
 
+// Deklarerer klasse instans
+const song = new SongController()
+
 // Route med GET method - henter
 postRouter.get('/posts', (req, res) => {
-	// Get parametre hentes på request objektets query property
-	console.log(req.query)
-	
-	res.send('Hent alle poster')
+	console.log(song.list());
+})
+
+// Route med GET method - henter detaljer
+postRouter.get('/posts/:id([0-9]*)', (req, res) => {
+	console.log(song.details());
 })
 
 // Route med POST method - opretter
