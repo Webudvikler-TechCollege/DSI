@@ -12,11 +12,6 @@ const app = express()
 // Udvider app så vi kan læse form body data
 app.use(express.urlencoded({ extended: true }))
 
-// Kalder root route - forsiden af vores app 
-app.get("/", (req, res) => {
-	res.send("Velkommen til min NodeJS app");
-})
-
 // Anvender eksterne routes
 app.use(postRouter)
 

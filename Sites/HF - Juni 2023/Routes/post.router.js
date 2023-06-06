@@ -10,12 +10,12 @@ const song = new SongController()
 
 // Route med GET method - henter
 postRouter.get('/posts', (req, res) => {
-	console.log(song.list());
+	return song.list(req, res)
 })
 
 // Route med GET method - henter detaljer
 postRouter.get('/posts/:id([0-9]*)', (req, res) => {
-	console.log(song.details());
+	return song.details(req, res)
 })
 
 // Route med POST method - opretter
