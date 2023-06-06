@@ -55,7 +55,7 @@ class SongController {
 
 export default SongController
 ```
-Når vi skal bruge klassen skal vi kalde en instans af den:
+Når vi skal bruge klassen skal vi kalde en instans af den inde fra vores router fil:
 ```js
 // Importerer klassen 
 import SongController from './Controllers/song.controller.js'
