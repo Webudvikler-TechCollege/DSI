@@ -56,9 +56,32 @@ class SongController {
 		}
 
 	}
-	// create
 
-	// update
+	update = (req, res) => {
+		const { title, content, artist_id, id } = req.body
+		console.log(req.body);
+
+		if(title && content && artist_id && id) {
+			const sql = `
+				UPDATE song 
+				SET title = ?,
+				content = ?,
+				artist_id = ? 
+				WHERE id = ?
+			`
+			db.query(sql, [title, content, artist_id, id], (err, result) => {
+				if(err) {
+					console.error(err)
+				} else {
+					console.log(sql);
+					res.json({
+						status: 'ok',
+						updated_id: id
+					})
+				}
+			})
+		}
+	}
 
 	// delete
 }

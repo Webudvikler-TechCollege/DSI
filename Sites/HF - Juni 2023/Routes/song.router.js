@@ -26,7 +26,7 @@ songRouter.post('/songs', (req, res) => {
 
 // Route med PUT method - opdaterer
 songRouter.put('/songs', (req, res) => {
-	res.send('Opdater sang')
+	return song.update(req, res)
 })
 
 // Route med DELETE method - Sletter
