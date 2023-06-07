@@ -6,11 +6,23 @@ class SongController {
 	}
 
 	list = (req, res) => {
-		const sql = `SELECT s.id, s.title, a.name, a.id AS artist_id
+		console.log(req.query);
+		
+		// Laver en destructure assignment
+		let { sortkey, sortdir, limit, attributes } = req.query
+
+		// Sætter ternary operator
+		sortkey = sortkey ? sortkey : 's.id'
+		sortdir = sortdir ? sortdir.toUpperCase() : 'ASC'
+		limit = limit ? `LIMIT ${parseInt(limit)}` : ''
+		attributes = attributes ? attributes : 's.id, s.title, a.name'
+
+		const sql = `SELECT ${attributes}
 						FROM song s 
 						JOIN artist a 
 						ON s.artist_id = a.id 
-						ORDER BY a.name`
+						ORDER BY ${sortkey} ${sortdir} ${limit}`
+		console.log(sql);
 		db.query(sql, (err, result) => {
 			if(err) {
 				console.error(err)
