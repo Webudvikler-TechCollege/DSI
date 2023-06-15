@@ -36,7 +36,21 @@ UserModel.init({
 	sequelize,
 	modelName: 'user',
 	freezeTableName: true,
-	underscored: true
+	underscored: true,
+	// Hooks bruges når vi skal manipulere data direkte 
+	// i modellen. I nedenstående eksempel krypterer 
+	// modellen password lige inden en oprettelse eller 
+	// en opdatering.
+	hooks: {
+		beforeCreate: async(user, options) => {
+			user.password = await createHash(user.password)
+		},
+		beforeUpdate: async(user, options) => {
+			user.password = await createHash(user.password)
+		},
+	}
+
+
 })
 
 /**
