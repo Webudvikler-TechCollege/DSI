@@ -13,7 +13,7 @@ Nu er du klar til at initialisere dit Node projekt. Det skal vi bruge npm til.
 
 Skriv følgende i din terminal:
 ```
-% npm init
+npm init
 ```
 Du vil nu blive bedt om at udfylde nogle indstillinger i terminalen. Hvis du trykker *Enter* vil terminalen vælge det der er anført i parantesen. 
 
