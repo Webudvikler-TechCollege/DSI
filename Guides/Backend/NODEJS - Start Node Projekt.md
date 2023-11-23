@@ -46,7 +46,7 @@ Opret en index.js fil i roden af din nye mappe.
 
 Prøv derefter at køre følgende kommando:
 ```
-% node index.js
+node index.js
 ```
 Der sker ikke rigtig noget - med mindre at du har lavet en fejl.
 
@@ -70,7 +70,7 @@ http.createServer((request, response) => {
 ```
 Prøv nu at køre kommandoen
 ```js
-% node index.js
+node index.js
 ```
 Det skulle gerne give dig et output i din terminal.
 
@@ -83,13 +83,13 @@ Her kan du med fordel bruge `nodemon` som er en npm pakke der automatisk opdater
 
 Nodemon installeres som følgende:
 ```
-% npm i -g nodemon
+npm i -g nodemon
 ```
 Det er en god ide at have denne pakke installeret globalt da det er et nyttigt modul at have i selve udviklingsprocessen. Du kan installere en pakke globalt ved at tilføje `-g` når du skrivee installationskommandoen.
 
 Når nodemon er installeret kan du efterfølgende køre dine js filer med kommandoen nodemon istedet for node:
 ```
-% nodemon index.js
+nodemon index.js
 ```
 Nodemon vil overvåge den kørte fil for ændringer og automatisk køre den når du gemmer din fil. 
 
@@ -115,5 +115,5 @@ http.createServer((request, response) => {
 ```
 Prøv nu at kalde din side med følgende kommando:
 ```
-% nodemon index.js
+nodemon index.js
 ```
