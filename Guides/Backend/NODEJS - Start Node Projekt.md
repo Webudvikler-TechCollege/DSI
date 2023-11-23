@@ -7,15 +7,6 @@ Find et passende navn til din folder
 ___
 ## 2. Åbn folder i VS Code
 Du skal nu åbne den nye folder i VS Code. Sørg for at du kan folderen i terminalen i VS Code.
-
-Den skulle gerne stå på noget a la:
-```
-jens@MyPC NyNodeMappe % 
-```
-I de følgende eksempler vil kommandoer i terminalen bare være markeret med et procent tegn:
-```
-% 
-```
 ___
 ## 3. Initialiser dit Node.js projekt
 Nu er du klar til at initialisere dit Node projekt. Det skal vi bruge npm til.
